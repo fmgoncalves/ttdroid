@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingLeft = "10dip">
+	<TextView	android:id="@+id/stationname" 
+    	android:textSize = "25px"
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content"/>
+    
+    <LinearLayout 
+    android:orientation="horizontal"
+   	android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+		<ImageView android:id="@+id/stationtp1" 
+			android:layout_width="25px" 
+			android:layout_height="25px"
+			android:paddingLeft="5px"/>
+		<ImageView android:id="@+id/stationtp2" 
+			android:layout_width="25px" 
+			android:layout_height="25px"
+			android:paddingLeft="5px"/>
+		<ImageView android:id="@+id/stationtp3" 
+			android:layout_width="25px" 
+			android:layout_height="25px"
+			android:paddingLeft="5px"/>
+	</LinearLayout>
+	
+	<LinearLayout android:orientation="vertical"
+  	android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft = "10dip">
+		<TextView android:text = "Destinos:" 
+    		android:textSize = "20px"
+    		android:layout_width="wrap_content" 
+    		android:layout_height="wrap_content"
+    		android:paddingTop = "20px"/>
+    	
+    	<LinearLayout android:orientation="horizontal"
+  		android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:paddingLeft = "10px">
+    		<TextView android:id="@+id/stationdeparture1" 
+    			android:textSize = "15px"
+    			android:layout_width="wrap_content" 
+    			android:layout_height="wrap_content"/>
+    		<ImageView android:id="@+id/departure1tp1" 
+				android:layout_width="15px" 
+				android:layout_height="15px"
+				android:paddingLeft="5px"/>
+			<ImageView android:id="@+id/departure1tp2" 
+				android:layout_width="15px" 
+				android:layout_height="15px"
+				android:paddingLeft="5px"/>
+			<ImageView android:id="@+id/departure1tp3" 
+				android:layout_width="15px" 
+				android:layout_height="15px"
+				android:paddingLeft="5px"/>
+    	</LinearLayout>
+    	
+    	<LinearLayout android:orientation="horizontal"
+  		android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:paddingLeft = "10px">
+    		<TextView android:id="@+id/stationdeparture2" 
+    			android:textSize = "15px"
+    			android:layout_width="wrap_content" 
+    			android:layout_height="wrap_content"/>
+    		<ImageView android:id="@+id/departure2tp1" 
+				android:layout_width="15px" 
+				android:layout_height="15px"
+				android:paddingLeft="5px"/>
+			<ImageView android:id="@+id/departure2tp2" 
+				android:layout_width="15px" 
+				android:layout_height="15px"
+				android:paddingLeft="5px"/>
+			<ImageView android:id="@+id/departure2tp3" 
+				android:layout_width="15px" 
+				android:layout_height="15px"
+				android:paddingLeft="5px"/>
+    	</LinearLayout>
+    	
+    	<LinearLayout android:orientation="horizontal"
+  		android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:paddingLeft = "10px">
+    		<TextView android:id="@+id/stationdeparture3" 
+    			android:textSize = "15px"
+    			android:layout_width="wrap_content" 
+    			android:layout_height="wrap_content"/>
+    		<ImageView android:id="@+id/departure3tp1" 
+				android:layout_width="15px" 
+				android:layout_height="15px"
+				android:paddingLeft="5px"/>
+			<ImageView android:id="@+id/departure3tp2" 
+				android:layout_width="15px" 
+				android:layout_height="15px"
+				android:paddingLeft="5px"/>
+			<ImageView android:id="@+id/departure3tp3" 
+				android:layout_width="15px" 
+				android:layout_height="15px"
+				android:paddingLeft="5px"/>
+    	</LinearLayout>
+    	
+	</LinearLayout>
+	
+</LinearLayout>
