@@ -6,6 +6,11 @@ import droid.ipm.tablelayout.R;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.Paint.Style;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,6 +21,7 @@ public class StationActivity extends Activity{
 	
 	private String[] connections;
 	private String[] departures;
+	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -84,23 +90,32 @@ public class StationActivity extends Activity{
 		  //TODO: isto com xml a estrutura, vai ficar mega comprido o c—digo, por causa dos ids sempre a diferir
 		  // por outro lado se nao for xml fica mais c—digo aqui mas menos c—digo para todos os elementos repetidos
 		  
+		  //read station information  
+		  getStationInformation(getIntent().getExtras().getString("Station"));
+		  
 		  LinearLayout mainLayout = new LinearLayout(this);
 		  mainLayout.setOrientation(1);
 		  mainLayout.setPadding(10, 5, 0, 0);
-		 
-		  //Display station name
-		  TextView text = new TextView(this);
-		  text.setText(getIntent().getExtras().getString("Station"));
-		  text.setTextSize(28);
-		  mainLayout.addView(text);
 		  
-		  //read station information  
-		  getStationInformation(getIntent().getExtras().getString("Station"));
+//	      Paint paint = new Paint(); 
+//	      paint.setStyle(Style.FILL); 
+//	      paint.setARGB(255, 80, 150, 30); 
+//	      RectF rect = new RectF(50,50,50,50); 
+//	      Canvas canvas = new Canvas();
+//	      canvas.drawRect(rect, paint); 
+//	      mainLayout.draw(canvas);
 		  
 		  LinearLayout main_transportsLayout = new LinearLayout(this);
 		  main_transportsLayout.setOrientation(0);
 		  
-		  //display station connections
+		  //Display station name
+		  TextView text = new TextView(this);
+		  text.setText(getIntent().getExtras().getString("Station"));
+		  text.setTextSize(28);
+		  text.setPadding(0, 0, 5, 0);
+		  main_transportsLayout.addView(text);
+		  
+		  //Display station connections
 		  ImageView icon;
 		  for(int i = 0; i < connections.length; i++){
 			  icon = new ImageView(this);
@@ -111,12 +126,12 @@ public class StationActivity extends Activity{
 			  else if(connections[i].equals("train"))
 				  icon.setImageResource(R.drawable.ic_train_m);
 			  icon.setScaleType(ImageView.ScaleType.MATRIX);
-			  icon.setPadding(5, 0, 0, 0);
+			  icon.setPadding(5, 8, 0, 0);
 			  main_transportsLayout.addView(icon);
 		  } 
 		  mainLayout.addView(main_transportsLayout);
 		  
-		  
+		  //Display next departure
 		  LinearLayout main_departuresLayout = new LinearLayout(this);
 		  main_departuresLayout.setOrientation(1);
 		  main_departuresLayout.setPadding(5, 15, 0, 0);
@@ -126,10 +141,6 @@ public class StationActivity extends Activity{
 		  text.setTextSize(21);
 		  main_departuresLayout.addView(text);
 		  
-		  int hours = Calendar.HOUR_OF_DAY;
-		  int minutes = Calendar.MINUTE; 
-		  
-		  //display station departures
 		  for(int i = 0; i < departures.length; i++){
 			  LinearLayout main_departure_departuresLayout = new LinearLayout(this);
 			  main_departure_departuresLayout.setOrientation(0);
@@ -138,47 +149,66 @@ public class StationActivity extends Activity{
 			  text = new TextView(this);
 			  text.setText(departures[i]);
 			  text.setTextSize(18);
+			  text.setPadding(0, 0, 5, 0);
 			  main_departure_departuresLayout.addView(text);
 			
 			  displayConnections(getConnections(departures[i]), main_departure_departuresLayout);
 			  
 			  text = new TextView(this);
-			  text.setText(getPrice(departures[i]));
+			  text.setText("Preo: "+getPrice(departures[i]));
 			  text.setTextSize(15);
-			  text.setPadding(5, 0, 0, 0);
+			  text.setPadding(10, 0, 0, 0);
 			  main_departure_departuresLayout.addView(text);
 			  
 			  main_departuresLayout.addView(main_departure_departuresLayout);
 			  
 			  text = new TextView(this);
-			  text.setText("00:01");
+			  text.setText(getNextDeparture(getIntent().getExtras().getString("Station"), departures[i]));
 			  text.setTextSize(15);
 			  text.setPadding(15, 0, 0, 0);
 			  main_departuresLayout.addView(text);
-			  
-			  text = new TextView(this);
-			  text.setText("01:20");
-			  text.setTextSize(12);
-			  text.setPadding(15, 0, 0, 0);
-			  main_departuresLayout.addView(text);
+
 		  }
 		  
 		  mainLayout.addView(main_departuresLayout);
 		  
+		  //Display map option
+		  LinearLayout main_mapLayout = new LinearLayout(this);
+		  main_mapLayout.setOrientation(0);
+		  main_mapLayout.setPadding(5, 15, 0, 0);
+		  
+		  icon = new ImageView(this);
+		  icon.setImageResource(R.drawable.ic_maps);
+		  icon.setScaleType(ImageView.ScaleType.MATRIX);
+		  
+		  main_mapLayout.addView(icon);
+		  
 		  text = new TextView(this);
-		  text.setText("Ir para...");
+		  text.setText("Mapa");
 		  text.setTextSize(21);
-		  text.setPadding(5, 15, 0, 0);
-		  		  
-		  text.setOnClickListener(new View.OnClickListener() {
+		  text.setPadding(5, 0, 0, 0);
+		  
+		  main_mapLayout.addView(text);
+		  
+		  main_mapLayout.setOnClickListener(new View.OnClickListener() {
 			    public void onClick(View view) {
-			    	Intent intent = new Intent(StationActivity.this, LocationActivity.class);
-			    	intent.putExtra("Station",getIntent().getExtras().getString("Station") );
-			        startActivity(intent);
+//			    	Intent intent = new Intent(StationActivity.this, LocationActivity.class);
+//			    	intent.putExtra("Station",getIntent().getExtras().getString("Station") );
+//			        startActivity(intent);
+			        
+			        String geoUriString = " ";
+			        if(getIntent().getExtras().getString("Station").equals("Cais do SodrŽ"))
+			        	geoUriString = "geo:0,0?q=38.705083,-9.145429&z=10"; 
+			        else if(getIntent().getExtras().getString("Station").equals("Cacilhas"))
+			        	geoUriString = "geo:0,0?q=38.688137,-9.147667&z=10"; 
+			        	
+			        Uri geoUri = Uri.parse(geoUriString);  
+			        Intent mapCall = new Intent(Intent.ACTION_VIEW, geoUri);  
+			        startActivity(mapCall);  
 			    }
 		  });
-		  mainLayout.addView(text);
 		  
+		  mainLayout.addView(main_mapLayout);
 		  setContentView(mainLayout);
 	}
 	
@@ -193,6 +223,52 @@ public class StationActivity extends Activity{
 				  connections = getResources().getStringArray(R.array.cacilhas_connections);
 				  departures = getResources().getStringArray(R.array.cacilhas_departures);
 		  }		
+	}
+	
+	String getNextDeparture(String origin, String destiny){
+		int day = Calendar.DAY_OF_WEEK;
+		int hours = Calendar.HOUR_OF_DAY;
+		int minutes = Calendar.MINUTE; 
+		
+		String[] schedule = null;
+		if(origin.equals("Cais do SodrŽ") && destiny.equals("Cacilhas")){
+			if(day > 1 && day < 7)
+				schedule = getResources().getStringArray(R.array.schedule_caisdosodre_cacilhas_uteis);
+			else
+				schedule = getResources().getStringArray(R.array.schedule_caisdosodre_cacilhas_sabados_domingos_feriados);
+		}else if(origin.equals("Cais do SodrŽ") && destiny.equals("Montijo")){
+			if(day > 1 && day < 7)
+				schedule = getResources().getStringArray(R.array.schedule_caisdosodre_montijo_uteis);
+			else if(day == 1)
+				schedule = getResources().getStringArray(R.array.schedule_caisdosodre_montijo_sabados);
+			else
+				schedule = getResources().getStringArray(R.array.schedule_caisdosodre_montijo_domingos_feriados);
+		}else if(origin.equals("Cais do SodrŽ") && destiny.equals("Seixal")){
+			if(day > 1 && day < 7)
+				schedule = getResources().getStringArray(R.array.schedule_caisdosodre_seixal_uteis);
+			else if(day == 1)
+					schedule = getResources().getStringArray(R.array.schedule_caisdosodre_seixal_sabados);
+			else
+				schedule = getResources().getStringArray(R.array.schedule_caisdosodre_seixal_domingos_feriados);
+		}else if(origin.equals("Cacilhas") && destiny.equals("Cais do SodrŽ")){
+			if(day > 1 && day < 7)
+				schedule = getResources().getStringArray(R.array.schedule_cacilhas_caisdosodre_uteis);
+			else
+				schedule = getResources().getStringArray(R.array.schedule_cacilhas_caisdosodre_sabados_domingos_feriados);
+		}
+
+		for(int j = 0; j < schedule.length; j++){
+			String time = schedule[j];
+			if(time.contains("F"))
+				time = time.split(" ")[0];
+			String[] sTime = time.split(":");
+			int sHours = Integer.parseInt(sTime[0]);
+			int sMinutes = Integer.parseInt(sTime[1]);
+			if(sHours >= hours)
+				if(sMinutes >= minutes)
+					return schedule[j];
+		}
+		return " ";
 	}
 	
 	/**
@@ -245,7 +321,7 @@ public class StationActivity extends Activity{
 			  else if(connections[i].equals("train"))
 				  icon.setImageResource(R.drawable.ic_train_l);
 			  icon.setScaleType(ImageView.ScaleType.MATRIX);
-			  icon.setPadding(5, 0, 0, 0);
+			  icon.setPadding(5, 6, 0, 0);
 			  layout.addView(icon);
 		  } 
 	}

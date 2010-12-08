@@ -504,7 +504,7 @@
  </item>
 </string-array>
 
-<string-array name="schedule_cais_do_sodre_cacilhas_uteis">
+<string-array name="schedule_caisdosodre_cacilhas_uteis">
  <item>
   05:40 F
  </item>
@@ -1078,6 +1078,162 @@
 </string-array>
 
 <string-array name="schedule_caisdosodre_montijo_domingos_feriados">
+ <item>
+  08:30
+ </item>
+ <item>
+  10:00
+ </item>
+ <item>
+  11:30
+ </item>
+ <item>
+  13:00
+ </item>
+ <item>
+  14:30
+ </item>
+ <item>
+  15:30
+ </item>
+ <item>
+  17:00
+ </item>
+ <item>
+  18:30
+ </item>
+ <item>
+  20:00
+ </item>
+ <item>
+  21:30
+ </item>
+</string-array>
+
+<string-array name="schedule_caisdosodre_seixal_uteis">
+ <item>
+  06:30
+ </item>
+ <item>
+  07:00
+ </item>
+ <item>
+  07:30
+ </item>
+ <item>
+  08:00
+ </item>
+ <item>
+  08:30
+ </item>
+ <item>
+  09:00
+ </item>
+ <item>
+  09:30
+ </item>
+ <item>
+  10:00
+ </item>
+ <item>
+  11:00
+ </item>
+ <item>
+  12:00
+ </item>
+ <item>
+  13:00
+ </item>
+ <item>
+  14:00
+ </item>
+ <item>
+  15:00
+ </item>
+ <item>
+  16:00
+ </item>
+ <item>
+  17:00
+ </item>
+ <item>
+  17:30
+ </item>
+ <item>
+  18:00
+ </item>
+ <item>
+  18:30
+ </item>
+ <item>
+  19:00
+ </item>
+ <item>
+  19:30
+ </item>
+ <item>
+  20:00
+ </item>
+ <item>
+  20:30
+ </item>
+ <item>
+  21:00
+ </item>
+ <item>
+  21:30
+ </item>
+ <item>
+  22:30
+ </item>
+ <item>
+  23:30
+ </item>
+</string-array>
+
+<string-array name="schedule_caisdosodre_seixal_sabados">
+ <item>
+  06:30
+ </item>
+ <item>
+  07:30
+ </item>
+ <item>
+  08:30
+ </item>
+ <item>
+  09:30
+ </item>
+ <item>
+  10:30
+ </item>
+ <item>
+  12:00
+ </item>
+ <item>
+  13:30
+ </item>
+ <item>
+  14:30
+ </item>
+ <item>
+  16:00
+ </item>
+ <item>
+  17:30
+ </item>
+ <item>
+  19:00
+ </item>
+ <item>
+  20:30
+ </item>
+ <item>
+  22:30
+ </item>
+</string-array>
+
+<string-array name="schedule_caisdosodre_seixal_domingos_feriados">
  <item>
   08:30
  </item>

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import droid.ipm.tablelayout.R;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -46,7 +47,10 @@ public class ScheduleActivity extends Activity {
         button.setText("Ok");
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Perform action on click
+      	      Intent intent = new Intent(ScheduleActivity.this, DisplayScheduleActivity.class);
+    	      intent.putExtra("From", (String) spinnerFrom.getSelectedItem());
+    	      intent.putExtra("To", (String) spinnerTo.getSelectedItem()); 
+              startActivity(intent);
             }
         });
 
