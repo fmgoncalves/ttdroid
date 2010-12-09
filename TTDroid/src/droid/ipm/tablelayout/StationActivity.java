@@ -7,6 +7,7 @@ import droid.ipm.tablelayout.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Paint.Style;
@@ -96,6 +97,7 @@ public class StationActivity extends Activity{
 		  LinearLayout mainLayout = new LinearLayout(this);
 		  mainLayout.setOrientation(1);
 		  mainLayout.setPadding(10, 5, 0, 0);
+		  mainLayout.setBackgroundColor(Color.rgb(79,79,79));
 		  
 //	      Paint paint = new Paint(); 
 //	      paint.setStyle(Style.FILL); 
@@ -107,6 +109,8 @@ public class StationActivity extends Activity{
 		  
 		  LinearLayout main_transportsLayout = new LinearLayout(this);
 		  main_transportsLayout.setOrientation(0);
+
+		  main_transportsLayout.setBackgroundColor(Color.rgb(206, 111, 31));
 		  
 		  //Display station name
 		  TextView text = new TextView(this);
