@@ -129,7 +129,7 @@ public class StationActivity extends Activity{
 		  //Display next departure
 		  LinearLayout main_departuresLayout = new LinearLayout(this);
 		  main_departuresLayout.setOrientation(1);
-		  main_departuresLayout.setPadding(5, 15, 0, 0);
+		  main_departuresLayout.setPadding(5, 10, 0, 0);
 		  
 //		  text = new TextView(this);
 //		  text.setText("Partidas");
@@ -137,32 +137,57 @@ public class StationActivity extends Activity{
 //		  main_departuresLayout.addView(text);
 		  
 		  for(int i = 0; i < departures.length; i++){
+			  //div para informacao de um destino
 			  LinearLayout main_departure_departuresLayout = new LinearLayout(this);
 			  main_departure_departuresLayout.setOrientation(0);
-			  main_departure_departuresLayout.setPadding(5, 5, 0, 0);
+			  main_departure_departuresLayout.setPadding(5, 15, 0, 0);
+			  
+			  //div esquerda
+			  LinearLayout main_left_departure_departuresLayout = new LinearLayout(this);
+			  main_left_departure_departuresLayout.setOrientation(1);
+			  
+			  //div para titulo e icons dos transportes
+			  LinearLayout main_up_left_departure_departuresLayout = new LinearLayout(this);
+			  main_up_left_departure_departuresLayout.setOrientation(0);
 			  
 			  text = new TextView(this);
 			  text.setText(departures[i]);
 			  text.setTextSize(20);
 			  text.setPadding(0, 0, 5, 0);
-			  main_departure_departuresLayout.addView(text);
+			  main_up_left_departure_departuresLayout.addView(text);
 			
-			  displayConnections(getConnections(departures[i]), main_departure_departuresLayout);
+			  displayConnections(getConnections(departures[i]), main_up_left_departure_departuresLayout);
+			  
+			  main_left_departure_departuresLayout.addView(main_up_left_departure_departuresLayout);
 			  
 			  text = new TextView(this);
 			  text.setText("Preo: "+getPrice(departures[i]));
-			  text.setTextSize(15);
-			  text.setPadding(10, 0, 0, 0);
-			  main_departure_departuresLayout.addView(text);
+			  text.setTextSize(17);
+			  text.setPadding(15, 0, 0, 0);
+			  main_left_departure_departuresLayout.addView(text);
+			  
+			  text = new TextView(this);
+			  text.setText("Pr—ximo: "+getNextDeparture(getIntent().getExtras().getString("Station"), departures[i]));
+			  text.setTextSize(17);
+			  text.setPadding(15, 0, 0, 0);
+			  main_left_departure_departuresLayout.addView(text);
+			  
+			  main_departure_departuresLayout.addView(main_left_departure_departuresLayout);
+			  
+			  //div direita
+			  
+			  LinearLayout main_right_departure_departuresLayout = new LinearLayout(this);
+			  main_right_departure_departuresLayout.setOrientation(1);
+			  icon = new ImageView(this);
+			  icon.setImageResource(R.drawable.next);
+			  icon.setScaleType(ImageView.ScaleType.MATRIX);
+			  icon.setPadding(50, 25, 0, 0);
+			  main_right_departure_departuresLayout.addView(icon);
+			  
+			  main_departure_departuresLayout.addView(main_right_departure_departuresLayout);
 			  
 			  main_departuresLayout.addView(main_departure_departuresLayout);
 			  
-			  text = new TextView(this);
-			  text.setText(getNextDeparture(getIntent().getExtras().getString("Station"), departures[i]));
-			  text.setTextSize(15);
-			  text.setPadding(70, 0, 0, 0);
-			  main_departuresLayout.addView(text);
-
 		  }
 		  
 		  mainLayout.addView(main_departuresLayout);
@@ -175,17 +200,18 @@ public class StationActivity extends Activity{
 		  icon = new ImageView(this);
 		  icon.setImageResource(R.drawable.ic_maps);
 		  icon.setScaleType(ImageView.ScaleType.MATRIX);
+		  icon.setPadding(0, 20, 0, 0);
 		  
 		  main_mapLayout.addView(icon);
 		  
-		  text = new TextView(this);
-		  text.setText("Mapa");
-		  text.setTextSize(21);
-		  text.setPadding(5, 0, 0, 0);
+//		  text = new TextView(this);
+//		  text.setText("Mapa");
+//		  text.setTextSize(21);
+//		  text.setPadding(5, 0, 0, 0);
+//		  
+//		  main_mapLayout.addView(text);
 		  
-		  main_mapLayout.addView(text);
-		  
-		  main_mapLayout.setOnClickListener(new View.OnClickListener() {
+		  icon.setOnClickListener(new View.OnClickListener() {
 			    public void onClick(View view) {
 //			    	Intent intent = new Intent(StationActivity.this, LocationActivity.class);
 //			    	intent.putExtra("Station",getIntent().getExtras().getString("Station") );
