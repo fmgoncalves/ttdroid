@@ -3,9 +3,7 @@
       package="droid.ipm.tablelayout"
       android:versionCode="1"
       android:versionName="1.0">
-    <uses-permission android:name="android.permission.INTERNET" />
-    <application android:icon="@drawable/icon" android:label="@string/app_name">
-    	<uses-library android:name="com.google.android.maps" />
+    <application android:icon="@drawable/icon" android:label="@string/app_name" >
         <activity android:name=".TabLayoutActivity"
                   android:label="@string/app_name"
                   android:theme="@android:style/Theme.NoTitleBar">
@@ -41,6 +39,8 @@
 
     </application>
 <!--  
+    <uses-permission android:name="android.permission.INTERNET" />
+	<uses-library android:name="com.google.android.maps" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name= "android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_LOCATION"/>
