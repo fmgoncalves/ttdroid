@@ -1112,73 +1112,97 @@
 
 <string-array name="schedule_caisdosodre_seixal_uteis">
  <item>
-  06:30
+  06:35
  </item>
  <item>
-  07:00
+  07:05
  </item>
  <item>
-  07:30
+  07:25
  </item>
  <item>
-  08:00
+  07:40
  </item>
  <item>
-  08:30
+  07:55
  </item>
  <item>
-  09:00
+  08:10
  </item>
  <item>
-  09:30
+  08:25
  </item>
  <item>
-  10:00
+  08:40
  </item>
  <item>
-  11:00
+  08:55
  </item>
  <item>
-  12:00
+  09:25
  </item>
  <item>
-  13:00
+  09:45
  </item>
  <item>
-  14:00
+  10:10
  </item>
  <item>
-  15:00
+  10:35
  </item>
  <item>
-  16:00
+  11:10
  </item>
  <item>
-  17:00
+  11:55
+ </item>
+ <item>
+  12:40
+ </item>
+ <item>
+  13:25
+ </item>
+ <item>
+  14:10
+ </item>
+ <item>
+  14:55
+ </item>
+ <item>
+  15:55
+ </item>
+ <item>
+  16:45
+ </item>
+ <item>
+  17:10
  </item>
  <item>
   17:30
  </item>
  <item>
-  18:00
+  17:55
  </item>
  <item>
-  18:30
+  18:15
+ </item>
+ <item>
+  18:40
  </item>
  <item>
   19:00
  </item>
  <item>
-  19:30
+  19:25
  </item>
  <item>
-  20:00
+  19:45
  </item>
  <item>
-  20:30
+  20:10
  </item>
  <item>
-  21:00
+  20:55
  </item>
  <item>
   21:30
@@ -1193,76 +1217,103 @@
 
 <string-array name="schedule_caisdosodre_seixal_sabados">
  <item>
-  06:30
+  07:20
  </item>
  <item>
-  07:30
+  08:00
  </item>
  <item>
-  08:30
+  08:40
  </item>
  <item>
-  09:30
- </item>
- <item>
-  10:30
- </item>
- <item>
-  12:00
- </item>
- <item>
-  13:30
- </item>
- <item>
-  14:30
- </item>
- <item>
-  16:00
- </item>
- <item>
-  17:30
- </item>
- <item>
-  19:00
- </item>
- <item>
-  20:30
- </item>
- <item>
-  22:30
- </item>
-</string-array>
-
-<string-array name="schedule_caisdosodre_seixal_domingos_feriados">
- <item>
-  08:30
+  09:20
  </item>
  <item>
   10:00
  </item>
  <item>
-  11:30
+  10:55
  </item>
  <item>
-  13:00
+  12:10
  </item>
  <item>
-  14:30
+  13:25
  </item>
  <item>
-  15:30
+  14:10
  </item>
  <item>
-  17:00
+  14:55
  </item>
  <item>
-  18:30
+  15:55
+ </item>
+ <item>
+  16:55
+ </item>
+ <item>
+  17:55
+ </item>
+ <item>
+  18:50
+ </item>
+ <item>
+  19:55
+ </item>
+ <item>
+  20:40
+ </item>
+ <item>
+  21:30
+ </item>
+</string-array>
+
+<string-array name="schedule_caisdosodre_seixal_domingos_feriados">
+ <item>
+  08:25
+ </item>
+ <item>
+  09:15
+ </item>
+ <item>
+  10:05
+ </item>
+ <item>
+  10:55
+ </item>
+ <item>
+  11:45
+ </item>
+ <item>
+  13:10
+ </item>
+ <item>
+  14:00
+ </item>
+ <item>
+  14:50
+ </item>
+ <item>
+  15:50
+ </item>
+ <item>
+  16:45
+ </item>
+ <item>
+  17:45
+ </item>
+ <item>
+  19:10
  </item>
  <item>
   20:00
  </item>
  <item>
-  21:30
+  20:50
+ </item>
+ <item>
+  21:40
  </item>
 </string-array>
     

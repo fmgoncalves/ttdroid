@@ -97,20 +97,11 @@ public class StationActivity extends Activity{
 		  LinearLayout mainLayout = new LinearLayout(this);
 		  mainLayout.setOrientation(1);
 		  mainLayout.setPadding(10, 5, 0, 0);
-		  mainLayout.setBackgroundColor(Color.rgb(79,79,79));
-		  
-//	      Paint paint = new Paint(); 
-//	      paint.setStyle(Style.FILL); 
-//	      paint.setARGB(255, 80, 150, 30); 
-//	      RectF rect = new RectF(50,50,50,50); 
-//	      Canvas canvas = new Canvas();
-//	      canvas.drawRect(rect, paint); 
-//	      mainLayout.draw(canvas);
+		  //mainLayout.setBackgroundColor(Color.rgb(79,79,79));
 		  
 		  LinearLayout main_transportsLayout = new LinearLayout(this);
 		  main_transportsLayout.setOrientation(0);
-
-		  main_transportsLayout.setBackgroundColor(Color.rgb(206, 111, 31));
+		  //main_transportsLayout.setBackgroundColor(Color.rgb(206, 111, 31));
 		  
 		  //Display station name
 		  TextView text = new TextView(this);
@@ -140,10 +131,10 @@ public class StationActivity extends Activity{
 		  main_departuresLayout.setOrientation(1);
 		  main_departuresLayout.setPadding(5, 15, 0, 0);
 		  
-		  text = new TextView(this);
-		  text.setText("Partidas");
-		  text.setTextSize(21);
-		  main_departuresLayout.addView(text);
+//		  text = new TextView(this);
+//		  text.setText("Partidas");
+//		  text.setTextSize(21);
+//		  main_departuresLayout.addView(text);
 		  
 		  for(int i = 0; i < departures.length; i++){
 			  LinearLayout main_departure_departuresLayout = new LinearLayout(this);
@@ -152,7 +143,7 @@ public class StationActivity extends Activity{
 			  
 			  text = new TextView(this);
 			  text.setText(departures[i]);
-			  text.setTextSize(18);
+			  text.setTextSize(20);
 			  text.setPadding(0, 0, 5, 0);
 			  main_departure_departuresLayout.addView(text);
 			
@@ -169,7 +160,7 @@ public class StationActivity extends Activity{
 			  text = new TextView(this);
 			  text.setText(getNextDeparture(getIntent().getExtras().getString("Station"), departures[i]));
 			  text.setTextSize(15);
-			  text.setPadding(15, 0, 0, 0);
+			  text.setPadding(70, 0, 0, 0);
 			  main_departuresLayout.addView(text);
 
 		  }
