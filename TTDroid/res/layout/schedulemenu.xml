@@ -1,0 +1,8 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/iaddalarm"
+        android:title="Add Alarm"
+        android:icon="@drawable/addalarm" />
+    <item android:id="@+id/iabout"
+        android:title="About"
+        android:icon="@drawable/about" />
+</menu>

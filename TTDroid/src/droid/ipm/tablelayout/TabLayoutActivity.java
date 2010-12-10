@@ -57,7 +57,7 @@ public class TabLayoutActivity extends TabActivity {
    
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.layout.menu, menu);
+        inflater.inflate(R.layout.generalmenu, menu);
         return true;
     }
     
