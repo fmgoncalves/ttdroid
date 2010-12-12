@@ -1,7 +1,5 @@
 package droid.ipm.tablelayout;
 
-import java.util.Arrays;
-
 import droid.ipm.tablelayout.R;
 
 import android.app.Activity;
@@ -13,14 +11,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import android.widget.AdapterView.OnItemSelectedListener;
 
 public class ScheduleActivity extends Activity {
 	
 	private Spinner spinnerFrom, spinnerTo;
 	private String[] stations;
-	private ScheduleActivity self;
 	private ArrayAdapter<String> adapter;
 	
 	@Override
@@ -28,7 +24,6 @@ public class ScheduleActivity extends Activity {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.schedule);
 	    
-	    self = this;
 	    stations = getResources().getStringArray(R.array.stations_array);
 
 	    spinnerFrom = (Spinner) findViewById(R.id.spinnerFrom);

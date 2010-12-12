@@ -54,6 +54,7 @@ public class DisplayScheduleActivity extends Activity{
 		  //div para o body
 		  LinearLayout main_bodyLayout = new LinearLayout(this);
 		  main_bodyLayout.setOrientation(1);
+		  main_bodyLayout.setPadding(10, 0, 10, 0);
 		  
 		  ImageView icon;
 		  for(int i = 0; i < schedule.length; i++){

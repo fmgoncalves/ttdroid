@@ -223,11 +223,16 @@ public class StationActivity extends Activity{
 			String[] sTime = time.split(":");
 			int sHours = Integer.parseInt(sTime[0]);
 			int sMinutes = Integer.parseInt(sTime[1]);
-			if(sHours >= hours)
-				if(sMinutes >= minutes)
+			//System.out.println("1 if "+sHours+" == "+hours);
+			if(sHours == hours){
+				//System.out.println("2 if "+sMinutes+" > "+minutes);
+				if(sMinutes > minutes)
 					return schedule[j];
+			}else if(sHours > hours){
+				return schedule[j];
+			}
 		}
-		return " ";
+		return schedule[0];
 	}
 	
     public boolean onCreateOptionsMenu(Menu menu){

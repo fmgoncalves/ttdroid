@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dip"
         android:text="@string/station_prompt_from"
+        android:textSize = "17px"
     />
     <Spinner 
         android:id="@+id/spinnerFrom"
@@ -21,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dip"
         android:text="@string/station_prompt_to"
+        android:textSize = "17px"
     />
     <Spinner 
         android:id="@+id/spinnerTo"
@@ -31,6 +33,8 @@
     <Button
 		android:id="@+id/button"
      	android:layout_height="wrap_content"
-     	android:layout_width="wrap_content"/>
+     	android:layout_width="65px"
+     	android:layout_marginLeft = "10px"
+     	android:layout_marginTop = "10px"/>
      	
 </LinearLayout>
