@@ -65,8 +65,7 @@ public class TabLayoutActivity extends TabActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
     	Intent intent;
         switch (item.getItemId()) {
-            case R.id.iother:	new XMLExample();
-            					break;
+            case R.id.iother:	break;
             case R.id.iabout: 	intent = new Intent(this, AboutActivity.class);
   	      						startActivityForResult(intent, 0);
             					break;

@@ -243,8 +243,7 @@ public class StationActivity extends Activity{
 	
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.iother:	new XMLExample();
-            					break;
+            case R.id.iother:	break;
             case R.id.iabout: 	startActivityForResult(new Intent(this, AboutActivity.class), 0);
             					break;
         }
