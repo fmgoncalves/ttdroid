@@ -90,8 +90,9 @@ public class StationActivity extends Activity{
 			  text.setTextSize(20);
 			  text.setPadding(0, 0, 5, 0);
 			  main_up_left_departure_departuresLayout.addView(text);
-			
-			  displayConnections(getConnections(departures[i]), main_up_left_departure_departuresLayout);
+			  String[] aux = getConnections(departures[i]);
+			  //System.out.println(aux.length);
+			  displayConnections(aux, main_up_left_departure_departuresLayout);
 			  
 			  main_left_departure_departuresLayout.addView(main_up_left_departure_departuresLayout);
 			  
@@ -180,7 +181,28 @@ public class StationActivity extends Activity{
 		  }else if(station.equals("Cacilhas")){
 				  connections = getResources().getStringArray(R.array.cacilhas_connections);
 				  departures = getResources().getStringArray(R.array.cacilhas_departures);
-		  }		
+		  }else if(station.equals("Porto Brand‹o")){
+			  connections = getResources().getStringArray(R.array.portobrandao_connections);
+			  departures = getResources().getStringArray(R.array.portobrandao_departures);
+		  }else if(station.equals("Trafaria")){
+			  connections = getResources().getStringArray(R.array.trafaria_connections);
+			  departures = getResources().getStringArray(R.array.trafaria_departures);
+		  }else if(station.equals("Belm")){
+			  connections = getResources().getStringArray(R.array.belem_connections);
+			  departures = getResources().getStringArray(R.array.belem_departures);
+		  }else if(station.equals("Terreiro do Pao")){
+			  connections = getResources().getStringArray(R.array.terreirodopaco_connections);
+			  departures = getResources().getStringArray(R.array.terreirodopaco_departures);
+		  }else if(station.equals("Barreiro")){
+			  connections = getResources().getStringArray(R.array.barreiro_connections);
+			  departures = getResources().getStringArray(R.array.barreiro_departures);
+		  }else if(station.equals("Seixal")){
+			  connections = getResources().getStringArray(R.array.seixal_connections);
+			  departures = getResources().getStringArray(R.array.seixal_departures);
+		  }else if(station.equals("Montijo")){
+			  connections = getResources().getStringArray(R.array.montijo_connections);
+			  departures = getResources().getStringArray(R.array.montijo_departures);
+		  }						
 	}
 	
 	String getNextDeparture(String origin, String destiny){
@@ -214,11 +236,63 @@ public class StationActivity extends Activity{
 				schedule = getResources().getStringArray(R.array.schedule_cacilhas_caisdosodre_uteis);
 			else
 				schedule = getResources().getStringArray(R.array.schedule_cacilhas_caisdosodre_sabados_domingos_feriados);
+		}else if(origin.equals("Seixal") && destiny.equals("Cais do Sodr")){
+			if(day > 1 && day < 7)
+				schedule = getResources().getStringArray(R.array.schedule_seixal_cais_do_sodre_uteis);
+			else if(day == 1)
+					schedule = getResources().getStringArray(R.array.schedule_seixal_cais_do_sodre_domingos_feriados);
+			else
+				schedule = getResources().getStringArray(R.array.schedule_seixal_cais_do_sodre_sabados);
+		}else if(origin.equals("Montijo") && destiny.equals("Cais do Sodr")){
+			if(day > 1 && day < 7)
+				schedule = getResources().getStringArray(R.array.schedule_montijo_cais_do_sodre_uteis);
+			else if(day == 1)
+					schedule = getResources().getStringArray(R.array.schedule_montijo_cais_do_sodre_domingos_feriados);
+			else
+				schedule = getResources().getStringArray(R.array.schedule_montijo_cais_do_sodre_sabados);
+		}else if(origin.equals("Trafaria") && destiny.equals("Belm")){
+			if(day > 1 && day < 7)
+				schedule = getResources().getStringArray(R.array.schedule_trafaria_belem_uteis);
+			else if(day == 1)
+					schedule = getResources().getStringArray(R.array.schedule_trafaria_belem_domingos_feriados);
+			else
+				schedule = getResources().getStringArray(R.array.schedule_trafaria_belem_sabados);
+		}else if(origin.equals("Porto Brand‹o") && destiny.equals("Belm")){
+			if(day > 1 && day < 7)
+				schedule = getResources().getStringArray(R.array.schedule_porto_brandao_belem_uteis);
+			else if(day == 1)
+					schedule = getResources().getStringArray(R.array.schedule_porto_brandao_belem_domingos_feriados);
+			else
+				schedule = getResources().getStringArray(R.array.schedule_porto_brandao_belem_sabados);
+		}else if(origin.equals("Belm") && destiny.equals("Trafaria")){
+			if(day > 1 && day < 7)
+				schedule = getResources().getStringArray(R.array.schedule_belem_trafaria_uteis);
+			else if(day == 1)
+					schedule = getResources().getStringArray(R.array.schedule_belem_trafaria_domingos_feriados);
+			else
+				schedule = getResources().getStringArray(R.array.schedule_belem_trafaria_sabados);
+		}else if(origin.equals("Porto Brand‹o") && destiny.equals("Trafaria")){
+			if(day > 1 && day < 7)
+				schedule = getResources().getStringArray(R.array.schedule_porto_brandao_trafaria_uteis);
+			else if(day == 1)
+					schedule = getResources().getStringArray(R.array.schedule_porto_brandao_trafaria_domingos_feriados);
+			else
+				schedule = getResources().getStringArray(R.array.schedule_porto_brandao_trafaria_sabados);
+		}else if(origin.equals("Barreiro") && destiny.equals("Terreiro do Pao")){
+			if(day > 1 && day < 7)
+				schedule = getResources().getStringArray(R.array.schedule_barreiro_terreiro_do_paco_uteis);
+			else
+				schedule = getResources().getStringArray(R.array.schedule_barreiro_terreiro_do_paco_sabados_domingos_feriados);
+		}else if(origin.equals("Terreiro do Pao") && destiny.equals("Barreiro")){
+			if(day > 1 && day < 7)
+				schedule = getResources().getStringArray(R.array.schedule_terreiro_do_paco_barreiro_uteis);
+			else
+				schedule = getResources().getStringArray(R.array.schedule_terreiro_do_paco_barreiro_sabados_domingos_feriados);
 		}
-
+			
 		for(int j = 0; j < schedule.length; j++){
 			String time = schedule[j];
-			if(time.contains("F"))
+			if(time.contains("F") || time.contains("a)") || time.contains("A") || time.contains("B") || time.contains("C"))
 				time = time.split(" ")[0];
 			String[] sTime = time.split(":");
 			int sHours = Integer.parseInt(sTime[0]);
@@ -261,7 +335,17 @@ public class StationActivity extends Activity{
 		  else if(station.equals("Seixal"))
 			  return getResources().getStringArray(R.array.seixal_connections);
 		  else if(station.equals("Montijo"))
-			  return getResources().getStringArray(R.array.montijo_connections);	
+			  return getResources().getStringArray(R.array.montijo_connections);
+		  else if(station.equals("Porto Brand‹o"))
+			  return getResources().getStringArray(R.array.portobrandao_connections);
+		  else if(station.equals("Trafaria"))
+			  return getResources().getStringArray(R.array.trafaria_connections);
+		  else if(station.equals("Terreiro do Pao"))
+			  return getResources().getStringArray(R.array.terreirodopaco_connections);
+		  else if(station.equals("Barreiro"))
+			  return getResources().getStringArray(R.array.barreiro_connections);
+		  else if(station.equals("Belm"))
+			  return getResources().getStringArray(R.array.belem_connections);
 		return null;
 	}
 	
@@ -282,6 +366,16 @@ public class StationActivity extends Activity{
 			return getResources().getString(R.string.price_montijo_caisdosodre);
 		}else if(station.equals("Montijo")){
 			return getResources().getString(R.string.price_seixal_caisdosodre);	
+		}else if(station.equals("Terreiro do Pao")){
+			return getResources().getString(R.string.price_terreirodopaco_barreiro);	
+		}else if(station.equals("Barreiro")){
+			return getResources().getString(R.string.price_terreirodopaco_barreiro);	
+		}else if(station.equals("Porto Brand‹o")){
+			return getResources().getString(R.string.price_trafaria_belem);	
+		}else if(station.equals("Trafaria")){
+			return getResources().getString(R.string.price_trafaria_belem);	
+		}else if(station.equals("Belm")){
+			return getResources().getString(R.string.price_trafaria_belem);	
 		}
 		return null;
 	}
@@ -290,6 +384,7 @@ public class StationActivity extends Activity{
 	* Display departure connections
 	*/
 	void displayConnections(String[] connections, LinearLayout layout){
+		System.out.println("ENTROU");
 		  ImageView icon;
 		  for(int i = 0; i < connections.length; i++){
 			  icon = new ImageView(this);

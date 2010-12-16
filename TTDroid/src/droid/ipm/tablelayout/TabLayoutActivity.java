@@ -2,8 +2,11 @@ package droid.ipm.tablelayout;
 
 import droid.ipm.tablelayout.R;
 import android.app.TabActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -65,7 +68,7 @@ public class TabLayoutActivity extends TabActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
     	Intent intent;
         switch (item.getItemId()) {
-            case R.id.iother:	break;
+            case R.id.iother: 	break;
             case R.id.iabout: 	intent = new Intent(this, AboutActivity.class);
   	      						startActivityForResult(intent, 0);
             					break;

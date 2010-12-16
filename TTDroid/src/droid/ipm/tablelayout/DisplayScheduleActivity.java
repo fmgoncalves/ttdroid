@@ -36,7 +36,7 @@ public class DisplayScheduleActivity extends Activity{
 		  int day = calendar.get(Calendar.DAY_OF_WEEK);
 
 		  String[] schedule = getSchedule(from, to, day);
-
+		  
 		  LinearLayout mainLayout = new LinearLayout(this);
 		  mainLayout.setOrientation(1);
 		  
@@ -57,6 +57,7 @@ public class DisplayScheduleActivity extends Activity{
 		  main_bodyLayout.setPadding(10, 0, 10, 0);
 		  
 		  ImageView icon;
+		  int label = 0;
 		  for(int i = 0; i < schedule.length; i++){
 			  LinearLayout main_lineLayout = new LinearLayout(this);
 			  main_lineLayout.setOrientation(0);
@@ -69,10 +70,24 @@ public class DisplayScheduleActivity extends Activity{
 			  main_lineLayout.addView(text);
 			  String line = "";
 			  while(i < schedule.length && hours == getHours(schedule[i])){
-				  if(schedule[i].split(":")[1].contains("F"))
+				  if(schedule[i].split(":")[1].contains("F")){
 					  line += schedule[i].split(":")[1].split(" ")[0]+"*     ";
-				  else
+					  label = 1;
+				  }else if(schedule[i].split(":")[1].contains("a)")){
+					  line += schedule[i].split(":")[1].split(" ")[0]+"*     ";
+					  label = 2;
+				  }else if(schedule[i].split(":")[1].contains("A")){
+					  line += schedule[i].split(":")[1].split(" ")[0]+"A     ";
+					  label = 3;
+				  }else if(schedule[i].split(":")[1].contains("B")){
+					  line += schedule[i].split(":")[1].split(" ")[0]+"B     ";
+					  label = 3;
+				  }else if(schedule[i].split(":")[1].contains("C")){
+					  line += schedule[i].split(":")[1].split(" ")[0]+"C     ";
+					  label = 3;
+				  }else
 					  line += schedule[i].split(":")[1]+"       ";
+
 				  i++;
 			  }
 			  i--;
@@ -93,8 +108,16 @@ public class DisplayScheduleActivity extends Activity{
 		  }
 		  
 		  text = new TextView(this);
-		  text.setText("* Ferry");
-		  text.setTextSize(20);
+		  switch(label){
+		  	case 1: text.setText("* Ferry");
+		  			break;
+		  	case 2: text.setText("* Com partida para BelŽm");
+		  			break;
+		  	case 3: text.setText("A - Destina-se apenas para Porto Brand‹o\nB - Directo ˆ Trafaria\nC - Percurso BelŽm-Trafaria-Porto Brand‹o");
+		  			break;
+		  }
+		  
+		  text.setTextSize(15);
 		  main_bodyLayout.addView(text);
 		  
 		  ScrollView scroll = new ScrollView(this);
@@ -144,45 +167,97 @@ public class DisplayScheduleActivity extends Activity{
     }
     
 	int getHours(String time){
-		if(time.contains("F"))
+		if(time.contains("F") || time.contains("a)") || time.contains("A") || time.contains("B") || time.contains("C"))
 			time = time.split(" ")[0];
 		String[] sTime = time.split(":");
 		return Integer.parseInt(sTime[0]);
 	}
 	
 	int getMinutes(String time){
-		if(time.contains("F"))
+		if(time.contains("F") || time.contains("a)") || time.contains("A") || time.contains("B") || time.contains("C"))
 			time = time.split(" ")[0];
 		String[] sTime = time.split(":");
 		return Integer.parseInt(sTime[1]);
 	}
 	
 	String[] getSchedule(String from, String to, int dayOfWeek){
-		  if(from.equals("Cais do SodrŽ") && to.equals("Cacilhas")){
-			  if(dayOfWeek > 1 && dayOfWeek < 7)
-				  return getResources().getStringArray(R.array.schedule_caisdosodre_cacilhas_uteis);
-			  else
-				  return getResources().getStringArray(R.array.schedule_caisdosodre_cacilhas_sabados_domingos_feriados);
-		  }else if(from.equals("Cais do SodrŽ") && to.equals("Montijo")){
-			  if(dayOfWeek > 1 && dayOfWeek < 7)
-				  return getResources().getStringArray(R.array.schedule_caisdosodre_montijo_uteis);
-			  else if(dayOfWeek == 1)
-				  return getResources().getStringArray(R.array.schedule_caisdosodre_montijo_sabados);
-			  else
-				  return getResources().getStringArray(R.array.schedule_caisdosodre_montijo_domingos_feriados);
-		  }else if(from.equals("Cais do SodrŽ") && to.equals("Seixal")){
-			  if(dayOfWeek > 1 && dayOfWeek < 7)
-				  return getResources().getStringArray(R.array.schedule_caisdosodre_seixal_uteis);
-			  else if(dayOfWeek == 1)
-				  return getResources().getStringArray(R.array.schedule_caisdosodre_seixal_sabados);
-			  else
-				  return getResources().getStringArray(R.array.schedule_caisdosodre_seixal_domingos_feriados);
-		  }else if(from.equals("Cacilhas") && to.equals("Cais do SodrŽ")){
-			  if(dayOfWeek > 1 && dayOfWeek < 7)
-				  return getResources().getStringArray(R.array.schedule_cacilhas_caisdosodre_uteis);
-			  else
-				  return getResources().getStringArray(R.array.schedule_cacilhas_caisdosodre_sabados_domingos_feriados);
-		  }
+		if(from.equals("Cais do SodrŽ") && to.equals("Cacilhas")){
+			if(dayOfWeek > 1 && dayOfWeek < 7)
+				return getResources().getStringArray(R.array.schedule_caisdosodre_cacilhas_uteis);
+			else
+				return getResources().getStringArray(R.array.schedule_caisdosodre_cacilhas_sabados_domingos_feriados);
+		}else if(from.equals("Cais do SodrŽ") && to.equals("Montijo")){
+			if(dayOfWeek > 1 && dayOfWeek < 7)
+				return getResources().getStringArray(R.array.schedule_caisdosodre_montijo_uteis);
+			else if(dayOfWeek == 1)
+				return getResources().getStringArray(R.array.schedule_caisdosodre_montijo_sabados);
+			else
+				return getResources().getStringArray(R.array.schedule_caisdosodre_montijo_domingos_feriados);
+		}else if(from.equals("Cais do SodrŽ") && to.equals("Seixal")){
+			if(dayOfWeek > 1 && dayOfWeek < 7)
+				return getResources().getStringArray(R.array.schedule_caisdosodre_seixal_uteis);
+			else if(dayOfWeek == 1)
+				return getResources().getStringArray(R.array.schedule_caisdosodre_seixal_sabados);
+			else
+				return getResources().getStringArray(R.array.schedule_caisdosodre_seixal_domingos_feriados);
+		}else if(from.equals("Cacilhas") && to.equals("Cais do SodrŽ")){
+			if(dayOfWeek > 1 && dayOfWeek < 7)
+				return getResources().getStringArray(R.array.schedule_cacilhas_caisdosodre_uteis);
+			else
+				return getResources().getStringArray(R.array.schedule_cacilhas_caisdosodre_sabados_domingos_feriados);
+		}else if(from.equals("Seixal") && to.equals("Cais do SodrŽ")){
+			if(dayOfWeek > 1 && dayOfWeek < 7)
+				return getResources().getStringArray(R.array.schedule_seixal_cais_do_sodre_uteis);
+			else if(dayOfWeek == 1)
+				return getResources().getStringArray(R.array.schedule_seixal_cais_do_sodre_domingos_feriados);
+			else
+				return getResources().getStringArray(R.array.schedule_seixal_cais_do_sodre_sabados);
+		}else if(from.equals("Montijo") && to.equals("Cais do SodrŽ")){
+			if(dayOfWeek > 1 && dayOfWeek < 7)
+				return getResources().getStringArray(R.array.schedule_montijo_cais_do_sodre_uteis);
+			else if(dayOfWeek == 1)
+				return getResources().getStringArray(R.array.schedule_montijo_cais_do_sodre_domingos_feriados);
+			else
+				return getResources().getStringArray(R.array.schedule_montijo_cais_do_sodre_sabados);
+		}else if(from.equals("Trafaria") && to.equals("BelŽm")){
+			if(dayOfWeek > 1 && dayOfWeek < 7)
+				return getResources().getStringArray(R.array.schedule_trafaria_belem_uteis);
+			else if(dayOfWeek == 1)
+				return getResources().getStringArray(R.array.schedule_trafaria_belem_domingos_feriados);
+			else
+				return getResources().getStringArray(R.array.schedule_trafaria_belem_sabados);
+		}else if(from.equals("Porto Brand‹o") && to.equals("BelŽm")){
+			if(dayOfWeek > 1 && dayOfWeek < 7)
+				return getResources().getStringArray(R.array.schedule_porto_brandao_belem_uteis);
+			else if(dayOfWeek == 1)
+				return getResources().getStringArray(R.array.schedule_porto_brandao_belem_domingos_feriados);
+			else
+				return getResources().getStringArray(R.array.schedule_porto_brandao_belem_sabados);
+		}else if(from.equals("BelŽm") && to.equals("Trafaria")){
+			if(dayOfWeek > 1 && dayOfWeek < 7)
+				return getResources().getStringArray(R.array.schedule_belem_trafaria_uteis);
+			else if(dayOfWeek == 1)
+				return getResources().getStringArray(R.array.schedule_belem_trafaria_domingos_feriados);
+			else
+				return getResources().getStringArray(R.array.schedule_belem_trafaria_sabados);
+		}else if(from.equals("Porto Brand‹o") && to.equals("Trafaria")){
+			if(dayOfWeek > 1 && dayOfWeek < 7)
+				return getResources().getStringArray(R.array.schedule_porto_brandao_trafaria_uteis);
+			else if(dayOfWeek == 1)
+				return getResources().getStringArray(R.array.schedule_porto_brandao_trafaria_domingos_feriados);
+			else
+				return getResources().getStringArray(R.array.schedule_porto_brandao_trafaria_sabados);
+		}else if(from.equals("Barreiro") && to.equals("Terreiro do Pao")){
+			if(dayOfWeek > 1 && dayOfWeek < 7)
+				return getResources().getStringArray(R.array.schedule_barreiro_terreiro_do_paco_uteis);
+			else
+				return getResources().getStringArray(R.array.schedule_barreiro_terreiro_do_paco_sabados_domingos_feriados);
+		}else if(from.equals("Terreiro do Pao") && to.equals("Barreiro")){
+			if(dayOfWeek > 1 && dayOfWeek < 7)
+				return getResources().getStringArray(R.array.schedule_terreiro_do_paco_barreiro_uteis);
+			else
+				return getResources().getStringArray(R.array.schedule_terreiro_do_paco_barreiro_sabados_domingos_feriados);
+		}
 		  return null;
 	}
 
