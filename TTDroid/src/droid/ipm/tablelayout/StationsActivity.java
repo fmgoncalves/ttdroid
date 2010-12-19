@@ -46,8 +46,8 @@ public class StationsActivity extends ListActivity {
 	  double lat, longi;
 		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		Location l = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-		XMLExample aux = new XMLExample(38.705083,-9.145429, 38.688137,-9.147667);
-		Toast.makeText(this, aux.gimme(), Toast.LENGTH_LONG).show();
+		//XMLExample aux = new XMLExample(38.705083,-9.145429, 38.688137,-9.147667);
+		//Toast.makeText(this, aux.gimme(), Toast.LENGTH_LONG).show();
 		if(l!=null){
 			lat=l.getLatitude();
 			longi=l.getLongitude();
