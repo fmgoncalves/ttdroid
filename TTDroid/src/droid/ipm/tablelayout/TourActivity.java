@@ -123,6 +123,11 @@ public class TourActivity extends Activity {
 		}
 	}
 	
+	public void newComment(){
+		Intent intent = new Intent(TourActivity.this, CommentActivity.class);
+		startActivity(intent);
+	}
+	
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent){
         super.onActivityResult(requestCode, resultCode, intent);
