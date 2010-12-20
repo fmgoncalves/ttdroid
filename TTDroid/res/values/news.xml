@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<array name="news">
+	<item>
+		{\"title\":\"Feliz Natal e um Óptimo 2011 a bordo do Grupo TRANSTEJO!\",
+		\"content\":\"Feliz Natal e um Óptimo 2011 a bordo do Grupo TRANSTEJO!\",
+		\"date\":\"Domingo, 28 de Novembro de 2010\"
+		}
+	</item>
+	<item>
+		{\"title\":\"Neste Natal, viaje com o Grupo Transtejo e leve a sua família ao Circo\",
+		\"content\":\"O Grupo Transtejo e a International Royal Circus apresentam o novo Espectáculo de Natal desta companhia, oferecendo, a si e à sua família, condições especiais de entrada. Saiba mais..\",
+		\"date\":\"Quarta-feira, 24 de Novembro de 2010\"
+		}
+	</item>
+	<item>
+		{\"title\":\"Transtejo realiza simulacro de incêndio a bordo\",
+		\"content\":\"A Transtejo realizou hoje, dia 17 de Junho de 2010, um simulacro de incêndio a bordo, com o objectivo de testar os meios de socorro internos e externos e o sistema de comunicação.\",
+		\"date\":\"Sexta-feira, 18 de Junho de 2010\"
+		}
+	</item>
+	<item>
+		{\"title\":\"Exposição Fotográfica “Praga e Lisboa aos olhos dos mestres do rio”\",
+		\"content\":\"A Estação Fluvial de Belém recebe a 9 de Junho a Exposição Fotográfica “Praga e Lisboa aos olhos do mestre do rio”, esta estará patente ao público até ao próximo dia 31 de Agosto.\",
+		\"date\":\"Segunda-feira, 14 de Junho de 2010\"
+		}
+	</item>
+	<item>
+		{\"title\":\"A Transtejo e o Desenvolvimento Sustentável\",
+		\"content\":\"O Grupo Transtejo foi recentemente convidado a participar num estudo que avaliou o desempenho de diversas empresas face às alterações climáticas. Este estudo juntou 39 empresas das quais 18 pertencem ao sector dos transportes.\",
+		\"date\":\"Quinta-feira, 21 de Janeiro de 2010\"
+		}
+	</item>
+</array>
+</resources>

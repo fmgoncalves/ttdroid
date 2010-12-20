@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+				xmlns:android="http://schemas.android.com/apk/res/android"
+				android:id="@+id/tour_list_element"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:layout_weight="1"
+				android:orientation="vertical"
+>
+				<TextView
+								android:layout_width="fill_parent"
+								android:textSize="20dp"
+								android:layout_height="wrap_content"
+								android:background="#303030"
+								android:textStyle="bold"
+								android:text="Nome do Percurso"
+								android:id="@+id/tour_name"
+				></TextView>
+				<RelativeLayout
+								android:layout_width="fill_parent"
+								android:id="@+id/RelativeLayout01"
+								android:layout_height="wrap_content"
+				>
+								<LinearLayout
+												android:id="@+id/LinearLayout01"
+												android:layout_height="fill_parent"
+												android:orientation="vertical"
+												android:layout_width="wrap_content"
+												android:layout_alignParentRight="true"
+								>
+												<TextView
+																android:layout_width="fill_parent"
+																android:gravity="center"
+																android:layout_weight="1"
+																android:id="@+id/monument_name02"
+																android:text="Outro Monumento"
+																android:layout_height="fill_parent"
+												></TextView>
+												<TextView
+																android:layout_width="fill_parent"
+																android:textSize="15sp"
+																android:gravity="center"
+																android:layout_weight="1"
+																android:id="@+id/monument_name01"
+																android:text="Um monumento"
+																android:layout_height="fill_parent"
+												></TextView>
+								</LinearLayout>
+								<ImageView
+												android:id="@+id/tour_scheme"
+												android:src="@drawable/tur"
+												android:layout_height="wrap_content"
+												android:scaleType="fitXY"
+												android:layout_width="fill_parent"
+												android:layout_toLeftOf="@+id/LinearLayout01"
+												android:layout_alignTop="@+id/LinearLayout01"
+								></ImageView>
+				</RelativeLayout>
+</LinearLayout>

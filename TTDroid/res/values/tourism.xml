@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<array name="tours">
+<!--All %% are escaped, using %%, due to the inability of setting formatted=\"false\" on typedarray's items-->
+<!--This array contains JSON definition of each tour. To add a tour include its information here in JSON format.-->
+	<item>
+		{
+			\"tour-name\":\"Lisboa Vista do Rio\",
+			\"description\":\"Embarque no cruzeiro Lisboa vista do Rio no Terreiro do Paço e suba o rio até a zona nova da cidade onde em 1998 se deu a Exposição Internacional de Lisboa, depois navegue no Tejo atravesse por debaixo da Ponte 25 de Abril e veja alguns dos monumentos emblemáticos nas duas margens, com a Torre de Belém.\",
+			\"img\":\"tur\",
+			\"monuments\": [{
+				\"monument_name\":\"Ponte 25 de Abril\",
+				\"image\":\"\",
+				\"wiki-url\":\"http://pt.wikipedia.org/wiki/Ponte_25_de_Abril\"
+			},{
+				\"monument_name\":\"Parque das Nações\",
+				\"image\":\"\",
+				\"wiki-url\":\"http://pt.wikipedia.org/wiki/Parque_das_Na%%C3%%A7%%C3%%B5es\"
+			},{
+				\"monument_name\":\"Torre de Belém\",
+				\"image\":\"\",
+				\"wiki-url\":\"http://pt.wikipedia.org/wiki/Torre_de_bel%%C3%%A9m\"
+			},{
+				\"monument_name\":\"Centro Cultural de Belém\",
+				\"image\":\"\",
+				\"wiki-url\":\"http://pt.wikipedia.org/wiki/Centro_Cultural_de_Bel%%C3%%A9m\"
+			},{
+				\"monument_name\":\"Sé Catedral\",
+				\"image\":\"\",
+				\"wiki-url\":\"http://pt.wikipedia.org/wiki/S%%C3%%A9_Catedral_de_Lisboa\"
+			}]
+		}
+	</item>
+	<item>
+		{
+			\"tour-name\":\"Descobrimentos\",
+			\"description\":\"Junte-se ao circuito dos Descobrimentos no Cais do Sodré e fique a conhecer a zona histórica da cidade através do Rio.\",
+			\"img\":\"tour_descobrimentos\",
+			\"monuments\": [{
+				\"monument_name\":\"Mosteiro dos Jerónimos\",
+				\"image\":\"\",
+				\"wiki-url\":\"http://pt.wikipedia.org/wiki/Mosteiro_dos_Jer%%C3%%B3nimos\"
+			},{
+				\"monument_name\":\"Padrão dos Descobrimentos\",
+				\"image\":\"\",
+				\"wiki-url\":\"http://pt.wikipedia.org/wiki/Padr%%C3%%A3o_dos_Descobrimentos\"
+			},{
+				\"monument_name\":\"Terreiro do Paço\",
+				\"image\":\"\",
+				\"wiki-url\":\"http://pt.wikipedia.org/wiki/Terreiro_do_Pa%%C3%%A7o\"
+			},{
+				\"monument_name\":\"Torre de Belém\",
+				\"image\":\"\",
+				\"wiki-url\":\"http://pt.wikipedia.org/wiki/Torre_de_bel%%C3%%A9m\"
+			}]
+		}
+	</item>
+</array>
+</resources>

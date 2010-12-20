@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+				xmlns:android="http://schemas.android.com/apk/res/android"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+>
+				<EditText
+								android:text="Nome"
+								android:id="@+id/commenter"
+								android:layout_height="wrap_content"
+								android:layout_width="fill_parent"
+								android:layout_alignParentTop="true"
+								android:padding="10px"
+				></EditText>
+				<RatingBar
+								android:id="@+id/rating"
+								android:layout_height="wrap_content"
+								android:layout_width="fill_parent"
+								android:layout_below="@+id/commenter"
+								android:layout_alignLeft="@+id/commenter"
+								android:layout_alignRight="@+id/commenter"
+								android:numStars="5"
+								android:stepSize="1.0"
+								android:padding="10px"
+				></RatingBar>
+				<EditText
+								android:text="Comentário"
+								android:id="@+id/comment"
+								android:layout_height="wrap_content"
+								android:layout_width="fill_parent"
+								android:layout_below="@+id/rating"
+								android:layout_alignLeft="@+id/rating"
+								android:layout_alignRight="@+id/rating"
+								android:layout_above="@+id/okbutton"
+								android:padding="10px"
+				></EditText>
+				<Button
+								android:id="@+id/okbutton"
+								android:layout_alignParentBottom="true"
+								android:layout_centerHorizontal="true"
+								android:layout_height="wrap_content"
+								android:text="OK"
+								android:textSize="20sp"
+								android:layout_width="wrap_content"
+								android:padding="10px"
+								android:onClick="success"
+				></Button>
+</RelativeLayout>

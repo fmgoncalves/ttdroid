@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+				xmlns:android="http://schemas.android.com/apk/res/android"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:padding="4px"
+>
+				
+				<ImageView
+								android:id="@+id/monument_thumb"
+								android:src="@drawable/tur"
+								android:layout_height="75sp"
+								android:layout_width="75sp"
+								android:layout_alignParentRight="true"
+								android:scaleType="fitXY"
+				></ImageView>
+				<TextView
+								android:id="@+id/monument_name"
+								android:text="Monumento"
+								android:layout_height="wrap_content"
+								android:layout_width="fill_parent"
+								android:gravity="center"
+								android:layout_toLeftOf="@+id/monument_thumb"
+								android:layout_alignTop="@+id/monument_thumb"
+								android:layout_alignBottom="@+id/monument_thumb"
+				></TextView>
+</RelativeLayout>

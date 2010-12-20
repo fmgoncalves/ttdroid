@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+				xmlns:android="http://schemas.android.com/apk/res/android"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:layout_marginTop="6px"
+				android:layout_marginBottom="6px"
+>
+				<TextView
+								android:text="News Item Tile"
+								android:textSize="15sp"
+								android:background="#505050"
+								android:layout_height="wrap_content"
+								android:layout_width="fill_parent"
+								android:id="@+id/title"
+								android:layout_alignParentTop="true"
+								android:textStyle="bold"
+								android:padding="2px"
+				>
+				</TextView>
+				<TextView
+								android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ullamcorper libero et mauris condimentum non suscipit diam vulputate. Nunc nunc nisl, lacinia eu porttitor ut."
+								android:layout_below="@+id/title"
+								android:layout_height="wrap_content"
+								android:layout_width="fill_parent"
+								android:id="@+id/content"
+								android:padding="4px"
+				></TextView>
+				<TextView
+								android:text="News/Date"
+								android:layout_height="wrap_content"
+								android:layout_width="wrap_content"
+								android:id="@+id/date"
+								android:layout_alignParentRight="true"
+								android:layout_below="@+id/content"
+				></TextView>
+</RelativeLayout>
