@@ -10,8 +10,11 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import droid.ipm.other.TourComment;
+import org.w3c.dom.DOMException;
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import android.app.Activity;
 import android.content.Context;
@@ -26,6 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import droid.ipm.other.TourComment;
 
 public class TourActivity extends Activity {
 	
@@ -90,6 +94,22 @@ public class TourActivity extends Activity {
 	private void showComments(LinearLayout comment_list) {
 		comment_list.removeAllViews();
 
+		TextView tv = new TextView(this);
+		tv.setText("Adicionar Comentário....");
+		tv.setTextSize(16f);
+		tv.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				newComment();
+			}
+		});
+		
+		comment_list.addView(tv);
+
+		comments.add(new TourComment("José Manuel", "Uma perspectiva diferente da história da cidade.", 3));
+		comments.add(new TourComment("Ernesto Ferreira", "Bom programa para uma tarde de Verão.", 3));
+		
 		LayoutInflater inflater = this.getLayoutInflater();
 		for(TourComment tc: comments){
 			View v = inflater.inflate(R.layout.comment_item, null);
