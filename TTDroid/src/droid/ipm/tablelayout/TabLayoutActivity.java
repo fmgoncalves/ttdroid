@@ -29,12 +29,6 @@ public class TabLayoutActivity extends TabActivity {
         // Create an Intent to launch an Activity for the tab (to be reused)
         intent = new Intent().setClass(this, NetworkActivity.class);
 
-        // Initialize a TabSpec for each tab and add it to the TabHost
-        spec = tabHost.newTabSpec("network").setIndicator("Rede",
-                          res.getDrawable(R.drawable.ic_tab_network))
-                      .setContent(intent);
-        tabHost.addTab(spec);
-
         intent = new Intent().setClass(this, StationsActivity.class);
         spec = tabHost.newTabSpec("stations").setIndicator("Estações",
                           res.getDrawable(R.drawable.ic_tab_stations))
@@ -47,9 +41,15 @@ public class TabLayoutActivity extends TabActivity {
                       .setContent(intent);
         tabHost.addTab(spec);
         
-        intent = new Intent().setClass(this, ScheduleActivity.class);
-        spec = tabHost.newTabSpec("Favorites").setIndicator("Favoritos",
-                          res.getDrawable(R.drawable.ic_tab_favorites))
+        intent = new Intent().setClass(this, NewsActivity.class);
+        spec = tabHost.newTabSpec("news").setIndicator("Notícias",
+                          res.getDrawable(R.drawable.ic_tab_news))
+                      .setContent(intent);
+        tabHost.addTab(spec);
+        
+        intent = new Intent().setClass(this, TourListActivity.class);
+        spec = tabHost.newTabSpec("turism").setIndicator("Turismo",
+                          res.getDrawable(R.drawable.ic_tab_turism))
                       .setContent(intent);
         tabHost.addTab(spec);
 

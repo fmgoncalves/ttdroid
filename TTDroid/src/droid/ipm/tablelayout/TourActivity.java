@@ -144,6 +144,7 @@ public class TourActivity extends Activity {
 	}
 	
 	public void newComment(){
+		System.out.println("New comment");
 		Intent intent = new Intent(TourActivity.this, CommentActivity.class);
 		startActivity(intent);
 	}
