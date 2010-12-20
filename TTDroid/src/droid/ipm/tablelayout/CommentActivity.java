@@ -3,8 +3,12 @@ package droid.ipm.tablelayout;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CommentActivity extends Activity {
 
@@ -13,13 +17,21 @@ public class CommentActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.comment);
+		Button ok_button = (Button)findViewById(R.id.okbutton);
+		//este onClick est‡ no xml mas se for chamado por l‡ o programa estoira....
+		ok_button.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				success();
+			}
+		});
 	}
 
 	public void success(){
 		Intent intent = new Intent();
-		intent.putExtra("commenter", ((TextView)this.findViewById(R.id.commenter)).getText());
-		intent.putExtra("comment", ((TextView)this.findViewById(R.id.comment)).getText());
-		intent.putExtra("rating", (int)((RatingBar)this.findViewById(R.id.rating)).getRating());
+		intent.putExtra("commenter", ((TextView)findViewById(R.id.commenter)).getText());
+		intent.putExtra("comment", ((TextView)findViewById(R.id.comment)).getText());
+		intent.putExtra("rating", (int)((RatingBar)findViewById(R.id.rating)).getRating());
 		setResult(RESULT_OK,intent);
         finish();
 	}

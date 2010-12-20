@@ -25,7 +25,8 @@
 				></TextView>
 				<RatingBar
 								android:id="@+id/rating"
-								android:numStars="5"
+								android:max="5"
+								style="?android:attr/ratingBarStyleSmall"
 								android:layout_height="wrap_content"
 								android:isIndicator="true"
 								android:layout_width="wrap_content"
