@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class StationActivity extends Activity{
@@ -168,7 +169,9 @@ public class StationActivity extends Activity{
 			    }
 		  });
 		  mainLayout.addView(main_mapLayout);
-		  setContentView(mainLayout);
+		  ScrollView sv = new ScrollView(this);
+		  sv.addView(mainLayout);
+		  setContentView(sv);
 	}
 	
 	/**

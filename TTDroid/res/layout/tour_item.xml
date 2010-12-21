@@ -6,6 +6,8 @@
 				android:layout_height="fill_parent"
 				android:layout_weight="1"
 				android:orientation="vertical"
+				android:focusable="true"
+				android:focusableInTouchMode="true"
 >
 				<TextView
 								android:layout_width="fill_parent"
@@ -49,11 +51,10 @@
 								<ImageView
 												android:id="@+id/tour_scheme"
 												android:src="@drawable/tur"
-												android:layout_height="wrap_content"
-												android:scaleType="fitXY"
 												android:layout_width="fill_parent"
-												android:layout_toLeftOf="@+id/LinearLayout01"
-												android:layout_alignTop="@+id/LinearLayout01"
+												android:layout_height="wrap_content"
+												android:scaleType="fitStart"
+												android:layout_alignParentLeft="true"
 								></ImageView>
 				</RelativeLayout>
 </LinearLayout>

@@ -36,7 +36,7 @@ public class TourListActivity extends Activity {
 				
 				View v = inflater.inflate(R.layout.tour_item, null);
 				((TextView) v.findViewById(R.id.tour_name)).setText(j.getString("tour-name"));
-				((ImageView) v.findViewById(R.id.tour_scheme)).setImageResource(getResources().getIdentifier(j.getString("img"), "drawable", "com.filipe.test"));
+				((ImageView) v.findViewById(R.id.tour_scheme)).setImageResource(getResources().getIdentifier(j.getString("img"), "drawable", "droid.ipm.tablelayout"));
 				
 				if(j.getJSONArray("monuments").length() > 0){
 					((TextView) v.findViewById(R.id.monument_name01)).setText(j.getJSONArray("monuments").getJSONObject(0).getString("monument_name"));

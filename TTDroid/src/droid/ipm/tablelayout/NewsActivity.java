@@ -8,6 +8,7 @@ import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -33,6 +34,9 @@ public class NewsActivity extends Activity {
 				((TextView) v.findViewById(R.id.title)).setText(j.getString("title"));
 				((TextView) v.findViewById(R.id.content)).setText(j.getString("content"));
 				((TextView) v.findViewById(R.id.date)).setText(j.getString("date"));
+				
+				v.setPadding(0, 0, 0, 6);
+				
 				ll.addView(v);
 				//TODO adicionar barra horizontal a dividir notícias
 			} catch (JSONException e) {

@@ -8,7 +8,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class CommentActivity extends Activity {
 
@@ -29,8 +28,8 @@ public class CommentActivity extends Activity {
 
 	public void success(){
 		Intent intent = new Intent();
-		intent.putExtra("commenter", ((TextView)findViewById(R.id.commenter)).getText());
-		intent.putExtra("comment", ((TextView)findViewById(R.id.comment)).getText());
+		intent.putExtra("commenter", ((TextView)findViewById(R.id.commenter)).getText().toString());
+		intent.putExtra("comment", ((TextView)findViewById(R.id.comment)).getText().toString());
 		intent.putExtra("rating", (int)((RatingBar)findViewById(R.id.rating)).getRating());
 		setResult(RESULT_OK,intent);
         finish();

@@ -20,7 +20,6 @@
 								android:layout_height="wrap_content"
 								android:layout_width="wrap_content"
 								android:layout_alignLeft="@+id/commenter"
-								android:layout_alignRight="@+id/rating"
 								android:padding="4px"
 				></TextView>
 				<RatingBar

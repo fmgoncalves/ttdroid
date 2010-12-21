@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -67,7 +66,7 @@ public class TourActivity extends Activity {
 				((ImageView) v.findViewById(R.id.monument_thumb))
 						.setImageResource(getResources().getIdentifier(
 								mon.getString("image"), "drawable",
-								"com.filipe.test"));
+								"droid.ipm.tablelayout"));
 				v.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -114,18 +113,8 @@ public class TourActivity extends Activity {
 
 		comment_list.addView(tv);
 
-		try {
-			comments.add(new TourComment(new String("José Manuel".getBytes(),
-					"UTF-8"),
-					"Uma perspectiva diferente da história da cidade.", 3));
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		comments.add(new TourComment("Ernesto Ferreira",
-				"Bom programa para uma tarde de Verão.", 4));
-
 		LayoutInflater inflater = this.getLayoutInflater();
+
 		for (TourComment tc : comments) {
 			View v = inflater.inflate(R.layout.comment_item, null);
 			((TextView) v.findViewById(R.id.commenter)).setText(tc
@@ -135,13 +124,28 @@ public class TourActivity extends Activity {
 					.getRating());
 			comment_list.addView(v);
 		}
+		// Dummy data to fill up
+		View v0 = inflater.inflate(R.layout.comment_item, null);
+		if (tourName.equals("Descobrimentos")) {
+			((TextView) v0.findViewById(R.id.commenter)).setText("José Manuel");
+			((TextView) v0.findViewById(R.id.comment))
+					.setText("Uma perspectiva diferente da história da cidade.");
+			((RatingBar) v0.findViewById(R.id.rating)).setRating(3);
+		} else {
+			((TextView) v0.findViewById(R.id.commenter))
+					.setText("Ernesto Ferreira");
+			((TextView) v0.findViewById(R.id.comment))
+					.setText("Bom programa para uma tarde de Verão.");
+			((RatingBar) v0.findViewById(R.id.rating)).setRating(4);
+		}
+		comment_list.addView(v0);
 	}
 
 	private void loadComments() throws IOException, FileNotFoundException,
 			IOException, ClassNotFoundException {
 		ObjectInputStream in = new ObjectInputStream(
 				openFileInput(COMMENT_STORE + "_" + tourName));
-
+		comments = new LinkedList<TourComment>();
 		while (true) {
 			try {
 				comments.add((TourComment) in.readObject());
@@ -184,9 +188,10 @@ public class TourActivity extends Activity {
 					Toast.LENGTH_SHORT).show();
 			try {
 				loadComments();
-			} catch (Exception e){
-				//TODO que fazer quando a leitura falha???
+			} catch (Exception e) {
+				// TODO do what?
 			}
+			showComments((LinearLayout) findViewById(R.id.comment_list));
 		} else
 			Toast.makeText(
 					TourActivity.this,
