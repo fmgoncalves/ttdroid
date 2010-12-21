@@ -40,18 +40,6 @@ public class TabLayoutActivity extends TabActivity {
                           res.getDrawable(R.drawable.ic_tab_schedule))
                       .setContent(intent);
         tabHost.addTab(spec);
-        
-        intent = new Intent().setClass(this, NewsActivity.class);
-        spec = tabHost.newTabSpec("news").setIndicator(getResources().getString(R.string.tab_news),
-                          res.getDrawable(R.drawable.ic_tab_news))
-                      .setContent(intent);
-        tabHost.addTab(spec);
-        
-        intent = new Intent().setClass(this, TourListActivity.class);
-        spec = tabHost.newTabSpec("turism").setIndicator(getResources().getString(R.string.tab_turism),
-                          res.getDrawable(R.drawable.ic_tab_turism))
-                      .setContent(intent);
-        tabHost.addTab(spec);
 
         tabHost.setCurrentTab(0);
         

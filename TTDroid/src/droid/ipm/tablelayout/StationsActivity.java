@@ -1,6 +1,7 @@
 package droid.ipm.tablelayout;
 
 import droid.ipm.tablelayout.R;
+import droid.ipm.util.XMLExample;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
