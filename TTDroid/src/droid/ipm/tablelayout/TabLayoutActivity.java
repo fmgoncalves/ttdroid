@@ -40,6 +40,12 @@ public class TabLayoutActivity extends TabActivity {
                           res.getDrawable(R.drawable.ic_tab_schedule))
                       .setContent(intent);
         tabHost.addTab(spec);
+        
+        intent = new Intent().setClass(this, ScheduleActivity.class);
+        spec = tabHost.newTabSpec("favorites").setIndicator(getResources().getString(R.string.tab_favorites),
+                          res.getDrawable(R.drawable.ic_tab_favorites))
+                      .setContent(intent);
+        tabHost.addTab(spec);
 
         tabHost.setCurrentTab(0);
         

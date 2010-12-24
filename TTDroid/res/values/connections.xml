@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="caisdosodre_connections">
+    	<item>bus</item>
+    	<item>tram</item>
+    	<item>train</item>
+    </string-array>
+    <string-array name="cacilhas_connections">
+    	<item>bus</item>
+    	<item>tram</item>
+    </string-array>
+    <string-array name="seixal_connections">
+    	<item>bus</item>
+    </string-array>
+    <string-array name="montijo_connections">
+    	<item>bus</item>
+    </string-array>
+    <string-array name="trafaria_connections">
+    	<item>bus</item>
+    </string-array>
+    <string-array name="portobrandao_connections">
+    	<item>bus</item>
+    </string-array>
+    <string-array name="belem_connections">
+    	<item>bus</item>
+    	<item>train</item>
+    </string-array>
+    <string-array name="terreirodopaco_connections">
+    	<item>bus</item>
+    </string-array>
+    <string-array name="barreiro_connections">
+    	<item>bus</item>
+    	<item>train</item>
+    </string-array>
+</resources>

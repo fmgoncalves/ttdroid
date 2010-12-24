@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="caisdosodre_departures">
+    	<item>Cacilhas</item>
+    	<item>Seixal</item>
+    	<item>Montijo</item>
+    </string-array>
+    <string-array name="cacilhas_departures">
+    	<item>Cais do Sodré</item>
+    </string-array>
+    <string-array name="seixal_departures">
+    	<item>Cais do Sodré</item>
+    </string-array>
+    <string-array name="montijo_departures">
+    	<item>Cais do Sodré</item>
+    </string-array>
+    <string-array name="terreirodopaco_departures">
+    	<item>Barreiro</item>
+    </string-array>
+    <string-array name="barreiro_departures">
+    	<item>Terreiro do Paço</item>
+    </string-array>
+    <string-array name="trafaria_departures">
+    	<item>Belém</item>
+    </string-array>
+    <string-array name="belem_departures">
+    	<item>Trafaria</item>
+    </string-array>
+     <string-array name="portobrandao_departures">
+    	<item>Trafaria</item>
+    	<item>Belém</item>
+    </string-array>
+</resources>

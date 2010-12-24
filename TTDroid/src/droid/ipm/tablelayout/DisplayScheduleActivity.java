@@ -71,10 +71,10 @@ public class DisplayScheduleActivity extends Activity{
 			  String line = "";
 			  while(i < schedule.length && hours == getHours(schedule[i])){
 				  if(schedule[i].split(":")[1].contains("F")){
-					  line += schedule[i].split(":")[1].split(" ")[0]+"*     ";
+					  line += schedule[i].split(":")[1].split(" ")[0]+"F     ";
 					  label = 1;
 				  }else if(schedule[i].split(":")[1].contains("a)")){
-					  line += schedule[i].split(":")[1].split(" ")[0]+"*     ";
+					  line += schedule[i].split(":")[1].split(" ")[0]+"a     ";
 					  label = 2;
 				  }else if(schedule[i].split(":")[1].contains("A")){
 					  line += schedule[i].split(":")[1].split(" ")[0]+"A     ";
@@ -109,9 +109,9 @@ public class DisplayScheduleActivity extends Activity{
 		  
 		  text = new TextView(this);
 		  switch(label){
-		  	case 1: text.setText("* Ferry");
+		  	case 1: text.setText("F - Ferry");
 		  			break;
-		  	case 2: text.setText("* Com partida para BelŽm");
+		  	case 2: text.setText("a - Com partida para BelŽm");
 		  			break;
 		  	case 3: text.setText("A - Destina-se apenas para Porto Brand‹o\nB - Directo ˆ Trafaria\nC - Percurso BelŽm-Trafaria-Porto Brand‹o");
 		  			break;

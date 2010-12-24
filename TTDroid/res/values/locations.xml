@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="location_caisdosodre">38.705083,-9.145429</string>
+    <string name="location_cacilhas">38.688137,-9.147667</string>
+    <string name="location_belem">38.694966,-9.198185</string>   
+	<string name="location_portobrandao">38.677939,-9.206857</string>
+    <string name="location_trafaria">38.674297,-9.23119</string>
+    <string name="location_terreirodopaco">38.706741,-9.134037</string>
+    
+    <string name="location_barreiro">38.706741,-9.134037</string>
+    <string name="location_seixal">38.706741,-9.134037</string>
+    <string name="location_montijo">38.706741,-9.134037</string>
+</resources>

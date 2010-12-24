@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="price_cacilhas_caisdosodre">0,85 €</string>
+    <string name="price_montijo_caisdosodre">2,15 €</string>
+    <string name="price_seixal_caisdosodre">1,80 €</string>
+    <string name="price_trafaria_belem">0,90 €</string>
+    <string name="price_terreirodopaco_barreiro">1,80 €</string>
+</resources>

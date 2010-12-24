@@ -16,7 +16,7 @@ public class XMLExample{
 	/** Create Object For SiteList Class */
 	PathInformation pathInfo = null;
 	
-	public XMLExample(double originLat, double originLong, double destinyLat, double destinyLong){
+	public XMLExample(double originLat, double originLong, String loc){
 
 		try {
 			
@@ -27,9 +27,9 @@ public class XMLExample{
 
 			//http://maps.googleapis.com/maps/api/directions/xml?origin=38.705083,-9.145429&destination=38.688137,-9.147667&region=pt&avoid=highways&sensor=true
 			/** Send URL to parse XML Tags */
+			//System.out.println("http://maps.googleapis.com/maps/api/directions/xml?origin="+Double.toString(originLat)+","+Double.toString(originLong)+"&destination=loc&region=pt&avoid=highways&sensor=true");
 			URL sourceUrl = new URL(
-					"http://maps.googleapis.com/maps/api/directions/xml?origin="+Double.toString(originLat)+","+Double.toString(originLong)+"&destination="+Double.toString(destinyLat)+","+Double.toString(destinyLong)+"&region=pt&avoid=highways&sensor=true");
-
+					"http://maps.googleapis.com/maps/api/directions/xml?origin="+Double.toString(originLat)+","+Double.toString(originLong)+"&destination="+loc+"&region=pt&avoid=highways&sensor=true");
 			/** Create handler to handle XML Tags ( extends DefaultHandler ) */
 			XMLHandler myXMLHandler = new XMLHandler();
 			xr.setContentHandler(myXMLHandler);
