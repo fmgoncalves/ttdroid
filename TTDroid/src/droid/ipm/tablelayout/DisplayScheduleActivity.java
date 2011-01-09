@@ -1,6 +1,10 @@
 package droid.ipm.tablelayout;
 
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Calendar;
+
+import droid.ipm.util.Favorite;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -25,12 +29,16 @@ import android.graphics.Typeface;
 
 public class DisplayScheduleActivity extends Activity{
 	
+	private final String FAVORITE_STORE = "favorites_store";
+	String from;
+	String to;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		  super.onCreate(savedInstanceState);
 		  
-		  String from = getIntent().getExtras().getString("From");
-		  String to = getIntent().getExtras().getString("To");
+		  from = getIntent().getExtras().getString("From");
+		  to = getIntent().getExtras().getString("To");
 		  
 		  Calendar calendar = Calendar.getInstance();
 		  int day = calendar.get(Calendar.DAY_OF_WEEK);
@@ -124,6 +132,20 @@ public class DisplayScheduleActivity extends Activity{
 		  scroll.setSmoothScrollingEnabled(true);
 		  scroll.addView(main_bodyLayout);
 		  mainLayout.addView(scroll);
+		  
+		  LinearLayout main_footerLayout = new LinearLayout(this);
+		  main_footerLayout.setOrientation(0);
+		  icon = new ImageView(this);
+		  icon.setImageResource(R.drawable.previous);
+		  icon.setScaleType(ImageView.ScaleType.MATRIX);
+		  main_footerLayout.addView(icon);
+		  
+		  icon = new ImageView(this);
+		  icon.setImageResource(R.drawable.next);
+		  icon.setScaleType(ImageView.ScaleType.MATRIX);
+		  main_footerLayout.addView(icon);
+		  
+		  mainLayout.addView(main_footerLayout);
 		  setContentView(mainLayout);
 
 		  
@@ -134,31 +156,12 @@ public class DisplayScheduleActivity extends Activity{
         inflater.inflate(R.layout.schedulemenu, menu);
         return true;
     }
-    
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-        case 0:
-            return new TimePickerDialog(this,
-                    mTimeSetListener, 00, 00, true);
-        }
-        return null;
-    }
-    
-	 // the callback received when the user "sets" the time in the dialog
-    private TimePickerDialog.OnTimeSetListener mTimeSetListener =
-        new TimePickerDialog.OnTimeSetListener() {
-			@Override
-			public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-				Toast.makeText(DisplayScheduleActivity.this, "Alarme adicionado com sucesso", Toast.LENGTH_LONG).show();
-			}
-		};
 	
     public boolean onOptionsItemSelected(MenuItem item) {
     	Intent intent;
         switch (item.getItemId()) {
-            case R.id.iaddalarm: showDialog(0);
-            					break;
+            case R.id.iaddfavorite:	saveFavorite();
+            						break;
             case R.id.iabout: 	intent = new Intent(this, AboutActivity.class);
   	      						startActivityForResult(intent, 0);
             					break;
@@ -166,6 +169,18 @@ public class DisplayScheduleActivity extends Activity{
         return true;
     }
     
+	private void saveFavorite() {
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream(openFileOutput(
+					FAVORITE_STORE, Context.MODE_PRIVATE));
+			oos.writeObject(new Favorite(from,to));
+			oos.close();
+			Toast.makeText(this, "Favorito adicionado", Toast.LENGTH_LONG).show();
+		} catch (IOException e) {
+			Toast.makeText(this, "Tente novamente", Toast.LENGTH_LONG).show();
+		}
+	}
+
 	int getHours(String time){
 		if(time.contains("F") || time.contains("a)") || time.contains("A") || time.contains("B") || time.contains("C"))
 			time = time.split(" ")[0];

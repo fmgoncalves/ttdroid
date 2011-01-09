@@ -41,7 +41,7 @@ public class TabLayoutActivity extends TabActivity {
                       .setContent(intent);
         tabHost.addTab(spec);
         
-        intent = new Intent().setClass(this, ScheduleActivity.class);
+        intent = new Intent().setClass(this, FavoritesActivity.class);
         spec = tabHost.newTabSpec("favorites").setIndicator(getResources().getString(R.string.tab_favorites),
                           res.getDrawable(R.drawable.ic_tab_favorites))
                       .setContent(intent);
