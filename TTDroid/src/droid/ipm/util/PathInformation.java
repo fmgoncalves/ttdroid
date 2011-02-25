@@ -8,7 +8,7 @@ public class PathInformation {
 	/** Variables */
 	private ArrayList<String> name = new ArrayList<String>();
 	private ArrayList<String> website = new ArrayList<String>();
-	private String distance = "";
+	private Double distance = 0.0;
 
 	
 	/** In Setter method default it will return arraylist 
@@ -30,11 +30,11 @@ public class PathInformation {
 		this.website.add(website);
 	}
 
-	public String getDistance() {
+	public Double getDistance() {
 		return distance;
 	}
 
-	public void setDistance(String distance) {
+	public void setDistance(Double distance) {
 		this.distance = distance;
 	}
 

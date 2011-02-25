@@ -19,7 +19,6 @@ public class XMLExample{
 	public XMLExample(double originLat, double originLong, String loc){
 
 		try {
-			
 			/** Handling XML */
 			SAXParserFactory spf = SAXParserFactory.newInstance();
 			SAXParser sp = spf.newSAXParser();
@@ -37,7 +36,6 @@ public class XMLExample{
 			
             pathInfo = myXMLHandler.getParsedData();
 
-			
 		} catch (Exception e) {
 			System.out.println("XML Parsing Excpetion = " + e);
 		}
@@ -45,7 +43,7 @@ public class XMLExample{
 
 	}
 	
-	public String gimme(){
+	public Double getDistance(){
 		return pathInfo.getDistance();
 	}
 	

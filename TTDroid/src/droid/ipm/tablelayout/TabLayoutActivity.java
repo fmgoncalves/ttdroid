@@ -28,16 +28,16 @@ public class TabLayoutActivity extends TabActivity {
         
         // Create an Intent to launch an Activity for the tab (to be reused)
         intent = new Intent().setClass(this, NetworkActivity.class);
+        
+        intent = new Intent().setClass(this, ScheduleActivity.class);
+        spec = tabHost.newTabSpec("schedule").setIndicator(getResources().getString(R.string.tab_schedule),
+                          res.getDrawable(R.drawable.ic_tab_schedule))
+                      .setContent(intent);
+        tabHost.addTab(spec);
 
         intent = new Intent().setClass(this, StationsActivity.class);
         spec = tabHost.newTabSpec("stations").setIndicator(getResources().getString(R.string.tab_stations),
                           res.getDrawable(R.drawable.ic_tab_stations))
-                      .setContent(intent);
-        tabHost.addTab(spec);
-
-        intent = new Intent().setClass(this, ScheduleActivity.class);
-        spec = tabHost.newTabSpec("schedule").setIndicator(getResources().getString(R.string.tab_schedule),
-                          res.getDrawable(R.drawable.ic_tab_schedule))
                       .setContent(intent);
         tabHost.addTab(spec);
         

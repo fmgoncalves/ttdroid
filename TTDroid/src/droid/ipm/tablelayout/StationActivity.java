@@ -28,7 +28,7 @@ public class StationActivity extends Activity{
 		  super.onCreate(savedInstanceState);
 
 		  //read station information  
-		  getStationInformation(getIntent().getExtras().getString("Station"));
+		  getStationInformation(getIntent().getExtras().getString("station"));
 		  
 		  LinearLayout mainLayout = new LinearLayout(this);
 		  mainLayout.setOrientation(1);
@@ -104,7 +104,7 @@ public class StationActivity extends Activity{
 			  main_left_departure_departuresLayout.addView(text);
 			  
 			  text = new TextView(this);
-			  text.setText("Pr—ximo: "+getNextDeparture(getIntent().getExtras().getString("Station"), departures[i]));
+			  text.setText("Pr—ximo: "+getNextDeparture(getIntent().getExtras().getString("station"), departures[i]));
 			  text.setTextSize(17);
 			  text.setPadding(15, 0, 0, 0);
 			  main_left_departure_departuresLayout.addView(text);
@@ -124,7 +124,7 @@ public class StationActivity extends Activity{
 			  icon.setOnClickListener(new View.OnClickListener() {
 				    public void onClick(View view) {
 				    	Intent intent = new Intent(StationActivity.this, DisplayScheduleActivity.class);
-			    	      intent.putExtra("From", getIntent().getExtras().getString("Station"));
+			    	      intent.putExtra("From", getIntent().getExtras().getString("station"));
 			    	      intent.putExtra("To", departures[index]); 
 			              startActivity(intent);
 				    }

@@ -89,7 +89,8 @@ public class XMLHandler extends DefaultHandler{
     public void characters(char ch[], int start, int length) {
         if(this.in_distance && !this.in_step && this.in_text){
         	System.out.println(new String(ch, start, length));
-               myParsedDataSet.setDistance(new String(ch, start, length));
+        	String[] as = new String(ch, start, length).split(" ");
+               myParsedDataSet.setDistance(new Double(as[0]));
         }
     }
 }
