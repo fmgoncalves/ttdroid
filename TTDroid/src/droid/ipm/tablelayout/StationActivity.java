@@ -1,4 +1,4 @@
-package droid.ipm.tablelayout;
+	package droid.ipm.tablelayout;
 
 import java.util.Calendar;
 
@@ -16,19 +16,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.view.LayoutInflater;
 
 public class StationActivity extends Activity{
 	
+	private String station;
 	private String[] connections;
 	private String[] departures;
-	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		  super.onCreate(savedInstanceState);
-
+		  
+		  station = getIntent().getExtras().getString("station");
+		  
 		  //read station information  
-		  getStationInformation(getIntent().getExtras().getString("station"));
+		  getStationInformation(station);
 		  
 		  LinearLayout mainLayout = new LinearLayout(this);
 		  mainLayout.setOrientation(1);
@@ -41,7 +44,7 @@ public class StationActivity extends Activity{
 		  
 		  //Display station name
 		  TextView text = new TextView(this);
-		  text.setText(getIntent().getExtras().getString("Station"));
+		  text.setText(station);
 		  text.setTextSize(28);
 		  text.setPadding(0, 0, 5, 0);
 		  main_transportsLayout.addView(text);
@@ -65,76 +68,39 @@ public class StationActivity extends Activity{
 		  //Display next departure
 		  LinearLayout main_departuresLayout = new LinearLayout(this);
 		  main_departuresLayout.setOrientation(1);
-		  main_departuresLayout.setPadding(5, 10, 0, 0);
 		  
-//		  text = new TextView(this);
-//		  text.setText("Partidas");
-//		  text.setTextSize(21);
-//		  main_departuresLayout.addView(text);
-		  
-		  for(int i = 0; i < departures.length; i++){
-			  //div para informacao de um destino
-			  LinearLayout main_departure_departuresLayout = new LinearLayout(this);
-			  main_departure_departuresLayout.setOrientation(0);
-			  main_departure_departuresLayout.setPadding(5, 15, 0, 0);
-			  
-			  //div esquerda
-			  LinearLayout main_left_departure_departuresLayout = new LinearLayout(this);
-			  main_left_departure_departuresLayout.setOrientation(1);
-			  
-			  //div para titulo e icons dos transportes
-			  LinearLayout main_up_left_departure_departuresLayout = new LinearLayout(this);
-			  main_up_left_departure_departuresLayout.setOrientation(0);
-			  
-			  text = new TextView(this);
-			  text.setText(departures[i]);
-			  text.setTextSize(20);
-			  text.setPadding(0, 0, 5, 0);
-			  main_up_left_departure_departuresLayout.addView(text);
-			  String[] aux = getConnections(departures[i]);
-			  //System.out.println(aux.length);
-			  displayConnections(aux, main_up_left_departure_departuresLayout);
-			  
-			  main_left_departure_departuresLayout.addView(main_up_left_departure_departuresLayout);
-			  
-			  text = new TextView(this);
-			  text.setText("Preo: "+getPrice(departures[i]));
-			  text.setTextSize(17);
-			  text.setPadding(15, 0, 0, 0);
-			  main_left_departure_departuresLayout.addView(text);
-			  
-			  text = new TextView(this);
-			  text.setText("Pr—ximo: "+getNextDeparture(getIntent().getExtras().getString("station"), departures[i]));
-			  text.setTextSize(17);
-			  text.setPadding(15, 0, 0, 0);
-			  main_left_departure_departuresLayout.addView(text);
-			  
-			  main_departure_departuresLayout.addView(main_left_departure_departuresLayout);
-			  
-			  //div direita
-			  LinearLayout main_right_departure_departuresLayout = new LinearLayout(this);
-			  main_right_departure_departuresLayout.setOrientation(1);
-			  
-			  icon = new ImageView(this);
-			  icon.setImageResource(R.drawable.next);
-			  icon.setScaleType(ImageView.ScaleType.MATRIX);
-			  icon.setPadding(50, 25, 0, 0);
+		  LayoutInflater inflater = this.getLayoutInflater();
+		  for (int i = 0; i < departures.length; i++) {
+			  View v = inflater.inflate(R.layout.station_destiny, null);
+			  ((TextView) v.findViewById(R.id.name)).setText(departures[i]);
+
+			  String[] connections = getConnections(departures[i]);
+			  for(int j = 0; j < connections.length; j++){
+				  int target = 0;
+				  if(j == 0) target = R.id.transport1;
+				  else if(j == 1) target = R.id.transport2;
+				  else if(j == 2) target = R.id.transport3;
+				  
+				  if(connections[j].equals("bus")) ((ImageView) v.findViewById(target)).setImageResource(R.drawable.ic_bus_m);
+				  else if(connections[j].equals("tram")) ((ImageView) v.findViewById(target)).setImageResource(R.drawable.ic_tram_m);
+				  else if(connections[j].equals("train")) ((ImageView) v.findViewById(target)).setImageResource(R.drawable.ic_train_m);
+			  } 
+
+			  ((TextView) v.findViewById(R.id.price)).setText(getPrice(departures[i]));	
+			  ((TextView) v.findViewById(R.id.price)).setText(getNextDeparture(getIntent().getExtras().getString("station"), departures[i]));
 			  
 			  final int index = i;
-			  icon.setOnClickListener(new View.OnClickListener() {
+			  v.setOnClickListener(new View.OnClickListener() {
 				    public void onClick(View view) {
 				    	Intent intent = new Intent(StationActivity.this, DisplayScheduleActivity.class);
-			    	      intent.putExtra("From", getIntent().getExtras().getString("station"));
+			    	      intent.putExtra("From", station);
 			    	      intent.putExtra("To", departures[index]); 
 			              startActivity(intent);
 				    }
 			  });
 			  
-			  main_right_departure_departuresLayout.addView(icon);
-			  main_departure_departuresLayout.addView(main_right_departure_departuresLayout);
-			  main_departuresLayout.addView(main_departure_departuresLayout);
+			  main_departuresLayout.addView(v);
 		  }
-		  
 		  mainLayout.addView(main_departuresLayout);
 		  
 		  //Display map option

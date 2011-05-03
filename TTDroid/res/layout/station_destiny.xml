@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  	android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft = "10dip"
+    android:paddingTop = "10px"
+    android:focusable="true"
+    android:focusableInTouchMode= "true" >
+    	
+
+    <TextView android:id="@+id/name" 
+    	android:text="Destiny"
+    	android:textSize = "15px"
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content"/>
+    <ImageView android:id="@+id/transport1" 
+    	android:layout_width="15px" 
+		android:layout_height="15px"
+		android:layout_marginLeft="60px"
+		android:layout_marginTop="3px"/>
+	<ImageView android:id="@+id/transport2" 
+		android:layout_width="15px" 
+		android:layout_height="15px"
+		android:layout_marginLeft="80px"
+		android:layout_marginTop="3px"/>
+	<ImageView android:id="@+id/transport3" 
+		android:layout_width="15px" 
+		android:layout_height="15px"
+		android:layout_marginLeft="100px"
+		android:layout_marginTop="3px"/>
+    
+    <TextView
+    	android:text="Preço: "
+    	android:textSize = "13px"
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content"
+    	android:layout_marginLeft="5px"
+		android:layout_marginTop="20px"/>
+    <TextView android:id="@+id/price" 
+    	android:text="price"
+    	android:textSize = "13px"
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content"
+		android:layout_marginLeft="50px"
+		android:layout_marginTop="20px"/>
+    
+    <TextView
+    	android:text="Próximo: "
+    	android:textSize = "13px"
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content"
+    	android:layout_marginLeft="5px"
+		android:layout_marginTop="35px"/>
+    <TextView android:id="@+id/time" 
+    	android:text="time"
+    	android:textSize = "13px"
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content"
+    	android:layout_marginLeft="65px"
+		android:layout_marginTop="35px"/>
+    
+    <ImageView android:src="@drawable/next" 
+		android:layout_width="15px" 
+		android:layout_height="15px"
+		android:layout_marginTop="15px"
+		android:layout_alignParentRight="true"/>
+
+</RelativeLayout>

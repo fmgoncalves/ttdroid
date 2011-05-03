@@ -15,7 +15,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -31,6 +30,7 @@ public class StationsActivity extends Activity {
 
 		LayoutInflater inflater = this.getLayoutInflater();
 
+		ScrollView sv = new ScrollView(this);
 		LinearLayout ll = new LinearLayout(this);
 		ll.setOrientation(1);
 
@@ -73,7 +73,6 @@ public class StationsActivity extends Activity {
 				((TextView) v.findViewById(R.id.distance)).setText(String.valueOf(stationsInfo.get(i).getSecond())+" km");
 			
 			v.setOnClickListener(new View.OnClickListener() {
-				@Override
 				public void onClick(View v) {
 			    	Intent intent = new Intent(StationsActivity.this, StationActivity.class);
 		    	      intent.putExtra("station", name);
@@ -81,10 +80,11 @@ public class StationsActivity extends Activity {
 				}
 			});
 			
-			v.setPadding(0, 10, 0, 10);
+			v.setPadding(0, 6, 6, 6);
 			ll.addView(v);
 		}
-		setContentView(ll);
+		sv.addView(ll);
+		setContentView(sv);
 	}
 	
 	String getLocation(String station){
