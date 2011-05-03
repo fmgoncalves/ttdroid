@@ -87,7 +87,7 @@ public class StationActivity extends Activity{
 			  } 
 
 			  ((TextView) v.findViewById(R.id.price)).setText(getPrice(departures[i]));	
-			  ((TextView) v.findViewById(R.id.price)).setText(getNextDeparture(getIntent().getExtras().getString("station"), departures[i]));
+			  ((TextView) v.findViewById(R.id.time)).setText(getNextDeparture(getIntent().getExtras().getString("station"), departures[i]));
 			  
 			  final int index = i;
 			  v.setOnClickListener(new View.OnClickListener() {
