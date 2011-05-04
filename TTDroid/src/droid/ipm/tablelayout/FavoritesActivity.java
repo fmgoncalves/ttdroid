@@ -33,7 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class FavoritesActivity extends ListActivity {
+public class FavoritesActivity extends Activity {
 
 	private static final int COMMENT_REQUEST_CODE = 0;
 	// Filename to comments location
@@ -50,19 +50,32 @@ public class FavoritesActivity extends ListActivity {
 			favorites = new LinkedList<Favorite>();
 		}
 
-		this.setListAdapter(new ArrayAdapter<String>(this, R.layout.list_item, getFavoritesArray()));
+		LayoutInflater inflater = this.getLayoutInflater();
 
-		ListView lv = getListView();
-		lv.setTextFilterEnabled(true);
-
-		lv.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Intent intent = new Intent(FavoritesActivity.this, DisplayScheduleActivity.class);
-  	      		intent.putExtra("From", parent.getItemAtPosition(position).toString().split("  ")[0]);
-  	      		intent.putExtra("To", parent.getItemAtPosition(position).toString().split("  ")[2]); 
-  	      		startActivity(intent);
-			}
-		});
+		ScrollView sv = new ScrollView(this);
+		LinearLayout ll = new LinearLayout(this);
+		ll.setOrientation(1);
+		
+		for (Favorite favorite: favorites) {
+			View v = inflater.inflate(R.layout.favorites_item, null);
+			((TextView) v.findViewById(R.id.from)).setText(favorite.getFrom());
+			((TextView) v.findViewById(R.id.to)).setText(favorite.getTo());
+			
+			final Favorite f = favorite;
+			v.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View v) {
+			    	Intent intent = new Intent(FavoritesActivity.this, DisplayScheduleActivity.class);
+		    	      intent.putExtra("From", (String) f.getFrom());
+		    	      intent.putExtra("To", (String) f.getTo()); 
+		              startActivity(intent);
+				}
+			});
+			
+			v.setPadding(0, 6, 6, 6);
+			ll.addView(v);
+		}
+		sv.addView(ll);
+		setContentView(sv);
 	}
 
 
@@ -76,8 +89,7 @@ public class FavoritesActivity extends ListActivity {
 
 	private void loadFavorites() throws IOException, FileNotFoundException,
 			IOException, ClassNotFoundException {
-		ObjectInputStream in = new ObjectInputStream(
-				openFileInput(FAVORITE_STORE));
+		ObjectInputStream in = new ObjectInputStream(openFileInput(FAVORITE_STORE));
 		favorites = new LinkedList<Favorite>();
 		while (true) {
 			try {

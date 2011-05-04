@@ -1,8 +1,12 @@
 package droid.ipm.tablelayout;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
 
 import droid.ipm.util.Favorite;
 
@@ -169,16 +173,33 @@ public class DisplayScheduleActivity extends Activity{
         return true;
     }
     
-	private void saveFavorite() {
+	private void saveFavorite(){
 		try {
-			ObjectOutputStream oos = new ObjectOutputStream(openFileOutput(
-					FAVORITE_STORE, Context.MODE_PRIVATE));
+			List<Favorite> favorites = loadFavorites();
+			ObjectOutputStream oos = new ObjectOutputStream(openFileOutput(FAVORITE_STORE, Context.MODE_PRIVATE));
+			for (Favorite f : favorites)
+				oos.writeObject(f);
 			oos.writeObject(new Favorite(from,to));
 			oos.close();
 			Toast.makeText(this, "Favorito adicionado", Toast.LENGTH_LONG).show();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			Toast.makeText(this, "Tente novamente", Toast.LENGTH_LONG).show();
 		}
+	}
+	
+	
+	
+	private List<Favorite> loadFavorites() throws IOException, FileNotFoundException,IOException, ClassNotFoundException {
+		ObjectInputStream in = new ObjectInputStream(openFileInput(FAVORITE_STORE));
+		List<Favorite> result = new LinkedList<Favorite>();
+		while (true) {
+			try {
+				result.add((Favorite) in.readObject());
+			} catch (IOException e) {
+				break;
+			}
+		}
+		return result;
 	}
 
 	int getHours(String time){

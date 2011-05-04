@@ -27,7 +27,7 @@ public class StationActivity extends Activity{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		  super.onCreate(savedInstanceState);
-		  
+
 		  station = getIntent().getExtras().getString("station");
 		  
 		  //read station information  
@@ -37,7 +37,7 @@ public class StationActivity extends Activity{
 		  mainLayout.setOrientation(1);
 		  mainLayout.setPadding(10, 5, 0, 0);
 		  //mainLayout.setBackgroundColor(Color.rgb(79,79,79));
-		  
+
 		  LinearLayout main_transportsLayout = new LinearLayout(this);
 		  main_transportsLayout.setOrientation(0);
 		  //main_transportsLayout.setBackgroundColor(Color.rgb(206, 111, 31));
@@ -64,7 +64,7 @@ public class StationActivity extends Activity{
 			  main_transportsLayout.addView(icon);
 		  } 
 		  mainLayout.addView(main_transportsLayout);
-		  
+
 		  //Display next departure
 		  LinearLayout main_departuresLayout = new LinearLayout(this);
 		  main_departuresLayout.setOrientation(1);
@@ -73,7 +73,7 @@ public class StationActivity extends Activity{
 		  for (int i = 0; i < departures.length; i++) {
 			  View v = inflater.inflate(R.layout.station_destiny, null);
 			  ((TextView) v.findViewById(R.id.name)).setText(departures[i]);
-
+			  
 			  String[] connections = getConnections(departures[i]);
 			  for(int j = 0; j < connections.length; j++){
 				  int target = 0;
@@ -85,9 +85,8 @@ public class StationActivity extends Activity{
 				  else if(connections[j].equals("tram")) ((ImageView) v.findViewById(target)).setImageResource(R.drawable.ic_tram_m);
 				  else if(connections[j].equals("train")) ((ImageView) v.findViewById(target)).setImageResource(R.drawable.ic_train_m);
 			  } 
-
 			  ((TextView) v.findViewById(R.id.price)).setText(getPrice(departures[i]));	
-			  ((TextView) v.findViewById(R.id.time)).setText(getNextDeparture(getIntent().getExtras().getString("station"), departures[i]));
+			  ((TextView) v.findViewById(R.id.time)).setText(getNextDeparture(station, departures[i]));
 			  
 			  final int index = i;
 			  v.setOnClickListener(new View.OnClickListener() {
@@ -119,7 +118,7 @@ public class StationActivity extends Activity{
 //		  text.setTextSize(21);
 //		  text.setPadding(5, 0, 0, 0);
 //		  main_mapLayout.addView(text);
-		  
+
 		  icon.setOnClickListener(new View.OnClickListener() {
 			    public void onClick(View view) {
 //			    	Intent intent = new Intent(StationActivity.this, LocationActivity.class);
@@ -323,11 +322,11 @@ public class StationActivity extends Activity{
 	*/
 	String getPrice(String station){
 		if(station.equals("Cais do SodrŽ")){
-			if(getIntent().getExtras().getString("Station").equals("Cacilhas"))
+			if(this.station.equals("Cacilhas"))
 				return getResources().getString(R.string.price_cacilhas_caisdosodre);
-			else if(getIntent().getExtras().getString("Station").equals("Montijo"))
+			else if(this.station.equals("Montijo"))
 				return getResources().getString(R.string.price_montijo_caisdosodre);
-			else if(getIntent().getExtras().getString("Station").equals("Seixal"))
+			else if(this.station.equals("Seixal"))
 				return getResources().getString(R.string.price_seixal_caisdosodre);
 		}else if(station.equals("Cacilhas")){
 			return getResources().getString(R.string.price_cacilhas_caisdosodre);

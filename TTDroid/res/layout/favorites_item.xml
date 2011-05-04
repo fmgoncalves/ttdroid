@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:focusableInTouchMode="true"
+>
+
+ 	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent">
+		
+		<TextView
+			android:text="From"
+			android:textSize="18sp"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:id="@+id/from"
+			android:layout_alignParentTop="true"
+		>
+		</TextView>
+		
+		<TextView
+			android:text=" - "
+			android:textSize="18sp"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+		>
+		</TextView>
+		<TextView
+			android:text="To"
+			android:textSize="18sp"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:id="@+id/to"
+			android:layout_alignParentTop="true"
+		>
+		</TextView>
+	</LinearLayout>
+	
+     <Button
+        android:id="@+id/deletebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight = "true"
+        android:background="@drawable/delete_button" />
+	
+	<View android:id="@+id/divider"
+    android:background="@drawable/black_white_gradient"
+    android:layout_width="fill_parent"
+    android:layout_height="1dp"
+    android:layout_marginTop="35px"
+    />
+</RelativeLayout>
