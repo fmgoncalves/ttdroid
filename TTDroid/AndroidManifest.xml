@@ -13,9 +13,6 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".NetworkActivity"
-                  android:label="@string/app_name">
-        </activity>
   		<activity android:name=".StationsActivity"
                   android:label="@string/app_name">
         </activity>
@@ -23,7 +20,7 @@
                   android:label="@string/app_name">
         </activity>
         <activity android:name=".StationActivity"
-                  android:label="@string/app_name">
+                  android:label="TTDroid - Estação">
         </activity>
         <activity android:name=".AboutActivity"
                   android:label="@string/app_name">
@@ -33,7 +30,7 @@
      			android:theme="@android:style/Theme.NoTitleBar">
      	</activity>
      	<activity android:name=".DisplayScheduleActivity"
-                  android:label="@string/app_name">
+                  android:label="TTDroid - Horário">
         </activity>
         <activity android:name=".FavoritesActivity"
                   android:label="@string/app_name">

@@ -277,21 +277,6 @@ public class StationActivity extends Activity{
 		return schedule[0];
 	}
 	
-    public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.layout.generalmenu, menu);
-        return true;
-    }
-	
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.iother:	break;
-            case R.id.iabout: 	startActivityForResult(new Intent(this, AboutActivity.class), 0);
-            					break;
-        }
-        return true;
-    }
-	
 	/**
 	 * Return connections for the given station
 	 */

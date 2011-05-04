@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,8 +28,6 @@ public class TabLayoutActivity extends TabActivity {
         Intent intent;  // Reusable Intent for each tab
         
         // Create an Intent to launch an Activity for the tab (to be reused)
-        intent = new Intent().setClass(this, NetworkActivity.class);
-        
         intent = new Intent().setClass(this, ScheduleActivity.class);
         spec = tabHost.newTabSpec("schedule").setIndicator(getResources().getString(R.string.tab_schedule),
                           res.getDrawable(R.drawable.ic_tab_schedule))
@@ -62,7 +61,9 @@ public class TabLayoutActivity extends TabActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
     	Intent intent;
         switch (item.getItemId()) {
-            case R.id.iother: 	break;
+            case R.id.iwebsite: intent = new Intent("android.intent.action.VIEW", Uri.parse("http://www.transtejo.pt/"));
+            					startActivity(intent);
+            					break;
             case R.id.iabout: 	intent = new Intent(this, AboutActivity.class);
   	      						startActivityForResult(intent, 0);
             					break;
