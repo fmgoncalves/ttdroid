@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -35,7 +36,6 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class FavoritesActivity extends Activity {
 
-	private static final int COMMENT_REQUEST_CODE = 0;
 	// Filename to comments location
 	private final String FAVORITE_STORE = "favorites_store";
 	List<Favorite> favorites;
@@ -62,12 +62,21 @@ public class FavoritesActivity extends Activity {
 			((TextView) v.findViewById(R.id.to)).setText(favorite.getTo());
 			
 			final Favorite f = favorite;
-			v.setOnClickListener(new View.OnClickListener() {
+			LinearLayout l = (LinearLayout) v.findViewById(R.id.favlinearlayout);
+			l.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
 			    	Intent intent = new Intent(FavoritesActivity.this, DisplayScheduleActivity.class);
 		    	      intent.putExtra("From", (String) f.getFrom());
 		    	      intent.putExtra("To", (String) f.getTo()); 
 		              startActivity(intent);
+				}
+			});
+			
+			Button deleteButton = (Button) v.findViewById(R.id.deletebutton);
+			deleteButton.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View v) {
+			    	favorites.remove(f);
+			    	FavoritesActivity.this.saveFavorites();
 				}
 			});
 			
@@ -77,15 +86,6 @@ public class FavoritesActivity extends Activity {
 		sv.addView(ll);
 		setContentView(sv);
 	}
-
-
-	private String[] getFavoritesArray() {
-			String[] result = new String[favorites.size()];
-			for(int i = 0; i < favorites.size();i++)
-				result[i] = favorites.get(i).getFrom()+" - "+favorites.get(i).getTo();
-		return result;
-	}
-
 
 	private void loadFavorites() throws IOException, FileNotFoundException,
 			IOException, ClassNotFoundException {
@@ -97,6 +97,18 @@ public class FavoritesActivity extends Activity {
 			} catch (IOException e) {
 				break;
 			}
+		}
+	}
+	
+	private void saveFavorites(){
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream(openFileOutput(FAVORITE_STORE, Context.MODE_PRIVATE));
+			for (Favorite f : favorites)
+				oos.writeObject(f);
+			oos.close();
+			Toast.makeText(this, "Favorito eliminado", Toast.LENGTH_LONG).show();
+		} catch (Exception e) {
+			Toast.makeText(this, "Tente novamente", Toast.LENGTH_LONG).show();
 		}
 	}
 
