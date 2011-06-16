@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent">
+	<TextView android:text="Error" android:layout_height="wrap_content"
+		android:layout_width="fill_parent" android:id="@+id/schedule_title"
+		android:layout_alignParentTop="true" android:textSize="28sp"
+		android:gravity="center_horizontal"></TextView>
+	<LinearLayout android:layout_below="@+id/schedule_title"
+		android:layout_height="fill_parent" android:layout_width="fill_parent"
+		android:id="@+id/schedule_body" android:layout_alignLeft="@+id/schedule_title"
+		android:layout_alignRight="@+id/schedule_title"></LinearLayout>
+	<LinearLayout android:layout_height="wrap_content"
+		android:layout_width="fill_parent" android:id="@+id/schedule_footer"
+		android:layout_alignParentBottom="true" android:layout_below="@id/schedule_body"></LinearLayout>
+
+</RelativeLayout>

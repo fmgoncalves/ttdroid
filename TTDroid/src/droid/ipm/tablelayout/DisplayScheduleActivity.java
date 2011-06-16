@@ -5,41 +5,41 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
-import droid.ipm.util.Favorite;
-
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
-import android.app.Activity;
-import android.app.Dialog;
-import android.app.TimePickerDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Typeface;
+import droid.ipm.util.Favorite;
 
-public class DisplayScheduleActivity extends Activity{
-	
+public class DisplayScheduleActivity extends Activity {
+
 	private final String FAVORITE_STORE = "favorites_store";
 	String from;
 	String to;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		  super.onCreate(savedInstanceState);
+
+		  LayoutInflater inflater = this.getLayoutInflater();
+		  
+		  View mainLayout = inflater.inflate(R.layout.schedule_list, null);
 		  
 		  from = getIntent().getExtras().getString("From");
 		  to = getIntent().getExtras().getString("To");
@@ -49,97 +49,67 @@ public class DisplayScheduleActivity extends Activity{
 
 		  String[] schedule = getSchedule(from, to, day);
 		  
-		  LinearLayout mainLayout = new LinearLayout(this);
-		  mainLayout.setOrientation(1);
-		  
-		  //div para o header
-		  LinearLayout main_headerLayout = new LinearLayout(this);
-		  main_headerLayout.setOrientation(0);
-		  
-		  TextView text;
-		  text = new TextView(this);
-		  text.setText(from+" - "+to);
-		  text.setTextSize(28);
-		  main_headerLayout.addView(text);
-		  mainLayout.addView(main_headerLayout);
+		  TextView text = (TextView) mainLayout.findViewById(R.id.schedule_title);
+		  text.setText(String.format("%s - %s",from, to));
 		  
 		  //div para o body
-		  LinearLayout main_bodyLayout = new LinearLayout(this);
-		  main_bodyLayout.setOrientation(1);
-		  main_bodyLayout.setPadding(10, 0, 10, 0);
-		  
-		  ImageView icon;
-		  int label = 0;
-		  for(int i = 0; i < schedule.length; i++){
-			  LinearLayout main_lineLayout = new LinearLayout(this);
-			  main_lineLayout.setOrientation(0);
-			  main_lineLayout.setPadding(0, 5, 0, 5);
-			  int hours = getHours(schedule[i]);
-			  text = new TextView(this);
-			  text.setText(schedule[i].split(":")[0]);
-			  text.setTextSize(20);
-			  text.setTypeface(Typeface.DEFAULT_BOLD);
-			  main_lineLayout.addView(text);
-			  String line = "";
-			  while(i < schedule.length && hours == getHours(schedule[i])){
-				  if(schedule[i].split(":")[1].contains("F")){
-					  line += schedule[i].split(":")[1].split(" ")[0]+"F     ";
-					  label = 1;
-				  }else if(schedule[i].split(":")[1].contains("a)")){
-					  line += schedule[i].split(":")[1].split(" ")[0]+"a     ";
-					  label = 2;
-				  }else if(schedule[i].split(":")[1].contains("A")){
-					  line += schedule[i].split(":")[1].split(" ")[0]+"A     ";
-					  label = 3;
-				  }else if(schedule[i].split(":")[1].contains("B")){
-					  line += schedule[i].split(":")[1].split(" ")[0]+"B     ";
-					  label = 3;
-				  }else if(schedule[i].split(":")[1].contains("C")){
-					  line += schedule[i].split(":")[1].split(" ")[0]+"C     ";
-					  label = 3;
-				  }else
-					  line += schedule[i].split(":")[1]+"       ";
+		  LinearLayout main_bodyLayout = (LinearLayout) mainLayout.findViewById(R.id.schedule_body);
 
-				  i++;
+		  boolean label[] = new boolean[3];
+		  
+		  Map<String,List<String>> schdl = new HashMap<String, List<String>>();
+		  for(int i = 0; i < schedule.length; i++) {
+			  String[] x = schedule[i].split(":");
+			  String key = x[0];
+			  String value = x[1];
+			  char c = value.charAt(value.length()-1);
+			  switch(c) {
+			  case 'F':
+				  label[0] = true;
+			  case 'a':
+				  label[1] = true;
+			  case 'A':
+				  label[2] = true;
+			  case 'B':
+				  label[2] = true;
+			  case 'C':
+				  label[2] = true;
 			  }
-			  i--;
-			  
-			  text = new TextView(this);
-			  text.setText(line);
-			  text.setTextSize(20);
-			  text.setPadding(30, 0, 0, 0);
-			  main_lineLayout.addView(text);
-			  main_bodyLayout.addView(main_lineLayout);
-			  
-			  if(i != schedule.length - 1){
-				  icon = new ImageView(this);
-				  icon.setImageResource(R.drawable.line);
-				  main_bodyLayout.addView(icon);
+			  if(!schdl.containsKey(key)) {
+				  List<String> val = new LinkedList<String>();
+				  schdl.put(key, val);
 			  }
-			  
+			  schdl.get(key).add(value);
 		  }
 		  
-		  text = new TextView(this);
-		  switch(label){
-		  	case 1: text.setText("F - Ferry");
-		  			break;
-		  	case 2: text.setText("a - Com partida para Belém");
-		  			break;
-		  	case 3: text.setText("A - Destina-se apenas para Porto Brandão\nB - Directo à Trafaria\nC - Percurso Belém-Trafaria-Porto Brandão");
-		  			break;
+		  for( String x: schdl.keySet()) {
+			  View v = inflater.inflate(R.layout.schedule_item, null);
+			  TextView hour = (TextView) v.findViewById(R.id.item_hour);
+			  GridView minutes = (GridView) v.findViewById(R.id.item_minutes);
+			  hour.setText(x);
+			  minutes.setAdapter(new ArrayAdapter<String>(this,R.layout.simple_tv, schdl.get(x)));
+			  main_bodyLayout.addView(v);
 		  }
 		  
-		  text.setTextSize(15);
-		  main_bodyLayout.addView(text);
-		  
-		  ScrollView scroll = new ScrollView(this);
-		  scroll.setSmoothScrollingEnabled(true);
-		  scroll.addView(main_bodyLayout);
-		  mainLayout.addView(scroll);
-		  
-		  LinearLayout main_footerLayout = new LinearLayout(this);
+		  for(int i =0; i < label.length; i++) {
+			  if(label[i]) {
+				  text = new TextView(this);
+				  switch(i){
+				  	case 0: text.setText("F - Ferry");
+				  			break;
+				  	case 1: text.setText("a - Com partida para BelÔøΩm");
+				  			break;
+				  	case 2: text.setText("A - Destina-se apenas para Porto BrandÔøΩo\nB - Directo ÔøΩ Trafaria\nC - Percurso BelÔøΩm-Trafaria-Porto BrandÔøΩo");
+				  			break;
+				  }
+				  text.setTextSize(15);
+				  main_bodyLayout.addView(text);
+			  }
+		  }
+		  		  
+		  LinearLayout main_footerLayout = (LinearLayout) mainLayout.findViewById(R.id.schedule_footer);
 		  main_footerLayout.setOrientation(0);
-		  icon = new ImageView(this);
+		  ImageView icon = new ImageView(this);
 		  icon.setImageResource(R.drawable.previous);
 		  icon.setScaleType(ImageView.ScaleType.MATRIX);
 		  main_footerLayout.addView(icon);
@@ -148,49 +118,50 @@ public class DisplayScheduleActivity extends Activity{
 		  icon.setImageResource(R.drawable.next);
 		  icon.setScaleType(ImageView.ScaleType.MATRIX);
 		  main_footerLayout.addView(icon);
-		  
-		  mainLayout.addView(main_footerLayout);
-		  setContentView(mainLayout);
-
-		  
+		
+		  setContentView(mainLayout);  
 	}
-	
-    public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.layout.schedulemenu, menu);
-        return true;
-    }
-	
-    public boolean onOptionsItemSelected(MenuItem item) {
-    	Intent intent;
-        switch (item.getItemId()) {
-            case R.id.iaddfavorite:	saveFavorite();
-            						break;
-            case R.id.iabout: 	intent = new Intent(this, AboutActivity.class);
-  	      						startActivityForResult(intent, 0);
-            					break;
-        }
-        return true;
-    }
-    
-	private void saveFavorite(){
+
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.layout.schedulemenu, menu);
+		return true;
+	}
+
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent;
+		switch (item.getItemId()) {
+		case R.id.iaddfavorite:
+			saveFavorite();
+			break;
+		case R.id.iabout:
+			intent = new Intent(this, AboutActivity.class);
+			startActivityForResult(intent, 0);
+			break;
+		}
+		return true;
+	}
+
+	private void saveFavorite() {
 		try {
 			List<Favorite> favorites = loadFavorites();
-			ObjectOutputStream oos = new ObjectOutputStream(openFileOutput(FAVORITE_STORE, Context.MODE_PRIVATE));
+			ObjectOutputStream oos = new ObjectOutputStream(openFileOutput(
+					FAVORITE_STORE, Context.MODE_PRIVATE));
 			for (Favorite f : favorites)
 				oos.writeObject(f);
-			oos.writeObject(new Favorite(from,to));
+			oos.writeObject(new Favorite(from, to));
 			oos.close();
-			Toast.makeText(this, "Favorito adicionado", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "Favorito adicionado", Toast.LENGTH_LONG)
+					.show();
 		} catch (Exception e) {
 			Toast.makeText(this, "Tente novamente", Toast.LENGTH_LONG).show();
 		}
 	}
-	
-	
-	
-	private List<Favorite> loadFavorites() throws IOException, FileNotFoundException,IOException, ClassNotFoundException {
-		ObjectInputStream in = new ObjectInputStream(openFileInput(FAVORITE_STORE));
+
+	private List<Favorite> loadFavorites() throws IOException,
+			FileNotFoundException, IOException, ClassNotFoundException {
+		ObjectInputStream in = new ObjectInputStream(
+				openFileInput(FAVORITE_STORE));
 		List<Favorite> result = new LinkedList<Favorite>();
 		while (true) {
 			try {
@@ -202,99 +173,124 @@ public class DisplayScheduleActivity extends Activity{
 		return result;
 	}
 
-	int getHours(String time){
-		if(time.contains("F") || time.contains("a)") || time.contains("A") || time.contains("B") || time.contains("C"))
-			time = time.split(" ")[0];
-		String[] sTime = time.split(":");
-		return Integer.parseInt(sTime[0]);
-	}
-	
-	int getMinutes(String time){
-		if(time.contains("F") || time.contains("a)") || time.contains("A") || time.contains("B") || time.contains("C"))
-			time = time.split(" ")[0];
-		String[] sTime = time.split(":");
-		return Integer.parseInt(sTime[1]);
-	}
-	
-	String[] getSchedule(String from, String to, int dayOfWeek){
-		if(from.equals("Cais do Sodré") && to.equals("Cacilhas")){
-			if(dayOfWeek > 1 && dayOfWeek < 7)
-				return getResources().getStringArray(R.array.schedule_caisdosodre_cacilhas_uteis);
+	String[] getSchedule(String from, String to, int dayOfWeek) {
+		if (from.equals("Cais do SodrÔøΩ") && to.equals("Cacilhas")) {
+			if (dayOfWeek > 1 && dayOfWeek < 7)
+				return getResources().getStringArray(
+						R.array.schedule_caisdosodre_cacilhas_uteis);
 			else
-				return getResources().getStringArray(R.array.schedule_caisdosodre_cacilhas_sabados_domingos_feriados);
-		}else if(from.equals("Cais do Sodré") && to.equals("Montijo")){
-			if(dayOfWeek > 1 && dayOfWeek < 7)
-				return getResources().getStringArray(R.array.schedule_caisdosodre_montijo_uteis);
-			else if(dayOfWeek == 1)
-				return getResources().getStringArray(R.array.schedule_caisdosodre_montijo_sabados);
+				return getResources()
+						.getStringArray(
+								R.array.schedule_caisdosodre_cacilhas_sabados_domingos_feriados);
+		} else if (from.equals("Cais do SodrÔøΩ") && to.equals("Montijo")) {
+			if (dayOfWeek > 1 && dayOfWeek < 7)
+				return getResources().getStringArray(
+						R.array.schedule_caisdosodre_montijo_uteis);
+			else if (dayOfWeek == 1)
+				return getResources().getStringArray(
+						R.array.schedule_caisdosodre_montijo_sabados);
 			else
-				return getResources().getStringArray(R.array.schedule_caisdosodre_montijo_domingos_feriados);
-		}else if(from.equals("Cais do Sodré") && to.equals("Seixal")){
-			if(dayOfWeek > 1 && dayOfWeek < 7)
-				return getResources().getStringArray(R.array.schedule_caisdosodre_seixal_uteis);
-			else if(dayOfWeek == 1)
-				return getResources().getStringArray(R.array.schedule_caisdosodre_seixal_sabados);
+				return getResources().getStringArray(
+						R.array.schedule_caisdosodre_montijo_domingos_feriados);
+		} else if (from.equals("Cais do SodrÔøΩ") && to.equals("Seixal")) {
+			if (dayOfWeek > 1 && dayOfWeek < 7)
+				return getResources().getStringArray(
+						R.array.schedule_caisdosodre_seixal_uteis);
+			else if (dayOfWeek == 1)
+				return getResources().getStringArray(
+						R.array.schedule_caisdosodre_seixal_sabados);
 			else
-				return getResources().getStringArray(R.array.schedule_caisdosodre_seixal_domingos_feriados);
-		}else if(from.equals("Cacilhas") && to.equals("Cais do Sodré")){
-			if(dayOfWeek > 1 && dayOfWeek < 7)
-				return getResources().getStringArray(R.array.schedule_cacilhas_caisdosodre_uteis);
+				return getResources().getStringArray(
+						R.array.schedule_caisdosodre_seixal_domingos_feriados);
+		} else if (from.equals("Cacilhas") && to.equals("Cais do SodrÔøΩ")) {
+			if (dayOfWeek > 1 && dayOfWeek < 7)
+				return getResources().getStringArray(
+						R.array.schedule_cacilhas_caisdosodre_uteis);
 			else
-				return getResources().getStringArray(R.array.schedule_cacilhas_caisdosodre_sabados_domingos_feriados);
-		}else if(from.equals("Seixal") && to.equals("Cais do Sodré")){
-			if(dayOfWeek > 1 && dayOfWeek < 7)
-				return getResources().getStringArray(R.array.schedule_seixal_cais_do_sodre_uteis);
-			else if(dayOfWeek == 1)
-				return getResources().getStringArray(R.array.schedule_seixal_cais_do_sodre_domingos_feriados);
+				return getResources()
+						.getStringArray(
+								R.array.schedule_cacilhas_caisdosodre_sabados_domingos_feriados);
+		} else if (from.equals("Seixal") && to.equals("Cais do SodrÔøΩ")) {
+			if (dayOfWeek > 1 && dayOfWeek < 7)
+				return getResources().getStringArray(
+						R.array.schedule_seixal_cais_do_sodre_uteis);
+			else if (dayOfWeek == 1)
+				return getResources()
+						.getStringArray(
+								R.array.schedule_seixal_cais_do_sodre_domingos_feriados);
 			else
-				return getResources().getStringArray(R.array.schedule_seixal_cais_do_sodre_sabados);
-		}else if(from.equals("Montijo") && to.equals("Cais do Sodré")){
-			if(dayOfWeek > 1 && dayOfWeek < 7)
-				return getResources().getStringArray(R.array.schedule_montijo_cais_do_sodre_uteis);
-			else if(dayOfWeek == 1)
-				return getResources().getStringArray(R.array.schedule_montijo_cais_do_sodre_domingos_feriados);
+				return getResources().getStringArray(
+						R.array.schedule_seixal_cais_do_sodre_sabados);
+		} else if (from.equals("Montijo") && to.equals("Cais do SodrÔøΩ")) {
+			if (dayOfWeek > 1 && dayOfWeek < 7)
+				return getResources().getStringArray(
+						R.array.schedule_montijo_cais_do_sodre_uteis);
+			else if (dayOfWeek == 1)
+				return getResources()
+						.getStringArray(
+								R.array.schedule_montijo_cais_do_sodre_domingos_feriados);
 			else
-				return getResources().getStringArray(R.array.schedule_montijo_cais_do_sodre_sabados);
-		}else if(from.equals("Trafaria") && to.equals("Belém")){
-			if(dayOfWeek > 1 && dayOfWeek < 7)
-				return getResources().getStringArray(R.array.schedule_trafaria_belem_uteis);
-			else if(dayOfWeek == 1)
-				return getResources().getStringArray(R.array.schedule_trafaria_belem_domingos_feriados);
+				return getResources().getStringArray(
+						R.array.schedule_montijo_cais_do_sodre_sabados);
+		} else if (from.equals("Trafaria") && to.equals("BelÔøΩm")) {
+			if (dayOfWeek > 1 && dayOfWeek < 7)
+				return getResources().getStringArray(
+						R.array.schedule_trafaria_belem_uteis);
+			else if (dayOfWeek == 1)
+				return getResources().getStringArray(
+						R.array.schedule_trafaria_belem_domingos_feriados);
 			else
-				return getResources().getStringArray(R.array.schedule_trafaria_belem_sabados);
-		}else if(from.equals("Porto Brandão") && to.equals("Belém")){
-			if(dayOfWeek > 1 && dayOfWeek < 7)
-				return getResources().getStringArray(R.array.schedule_porto_brandao_belem_uteis);
-			else if(dayOfWeek == 1)
-				return getResources().getStringArray(R.array.schedule_porto_brandao_belem_domingos_feriados);
+				return getResources().getStringArray(
+						R.array.schedule_trafaria_belem_sabados);
+		} else if (from.equals("Porto BrandÔøΩo") && to.equals("BelÔøΩm")) {
+			if (dayOfWeek > 1 && dayOfWeek < 7)
+				return getResources().getStringArray(
+						R.array.schedule_porto_brandao_belem_uteis);
+			else if (dayOfWeek == 1)
+				return getResources().getStringArray(
+						R.array.schedule_porto_brandao_belem_domingos_feriados);
 			else
-				return getResources().getStringArray(R.array.schedule_porto_brandao_belem_sabados);
-		}else if(from.equals("Belém") && to.equals("Trafaria")){
-			if(dayOfWeek > 1 && dayOfWeek < 7)
-				return getResources().getStringArray(R.array.schedule_belem_trafaria_uteis);
-			else if(dayOfWeek == 1)
-				return getResources().getStringArray(R.array.schedule_belem_trafaria_domingos_feriados);
+				return getResources().getStringArray(
+						R.array.schedule_porto_brandao_belem_sabados);
+		} else if (from.equals("BelÔøΩm") && to.equals("Trafaria")) {
+			if (dayOfWeek > 1 && dayOfWeek < 7)
+				return getResources().getStringArray(
+						R.array.schedule_belem_trafaria_uteis);
+			else if (dayOfWeek == 1)
+				return getResources().getStringArray(
+						R.array.schedule_belem_trafaria_domingos_feriados);
 			else
-				return getResources().getStringArray(R.array.schedule_belem_trafaria_sabados);
-		}else if(from.equals("Porto Brandão") && to.equals("Trafaria")){
-			if(dayOfWeek > 1 && dayOfWeek < 7)
-				return getResources().getStringArray(R.array.schedule_porto_brandao_trafaria_uteis);
-			else if(dayOfWeek == 1)
-				return getResources().getStringArray(R.array.schedule_porto_brandao_trafaria_domingos_feriados);
+				return getResources().getStringArray(
+						R.array.schedule_belem_trafaria_sabados);
+		} else if (from.equals("Porto BrandÔøΩo") && to.equals("Trafaria")) {
+			if (dayOfWeek > 1 && dayOfWeek < 7)
+				return getResources().getStringArray(
+						R.array.schedule_porto_brandao_trafaria_uteis);
+			else if (dayOfWeek == 1)
+				return getResources()
+						.getStringArray(
+								R.array.schedule_porto_brandao_trafaria_domingos_feriados);
 			else
-				return getResources().getStringArray(R.array.schedule_porto_brandao_trafaria_sabados);
-		}else if(from.equals("Barreiro") && to.equals("Terreiro do Paço")){
-			if(dayOfWeek > 1 && dayOfWeek < 7)
-				return getResources().getStringArray(R.array.schedule_barreiro_terreiro_do_paco_uteis);
+				return getResources().getStringArray(
+						R.array.schedule_porto_brandao_trafaria_sabados);
+		} else if (from.equals("Barreiro") && to.equals("Terreiro do PaÔøΩo")) {
+			if (dayOfWeek > 1 && dayOfWeek < 7)
+				return getResources().getStringArray(
+						R.array.schedule_barreiro_terreiro_do_paco_uteis);
 			else
-				return getResources().getStringArray(R.array.schedule_barreiro_terreiro_do_paco_sabados_domingos_feriados);
-		}else if(from.equals("Terreiro do Paço") && to.equals("Barreiro")){
-			if(dayOfWeek > 1 && dayOfWeek < 7)
-				return getResources().getStringArray(R.array.schedule_terreiro_do_paco_barreiro_uteis);
+				return getResources()
+						.getStringArray(
+								R.array.schedule_barreiro_terreiro_do_paco_sabados_domingos_feriados);
+		} else if (from.equals("Terreiro do PaÔøΩo") && to.equals("Barreiro")) {
+			if (dayOfWeek > 1 && dayOfWeek < 7)
+				return getResources().getStringArray(
+						R.array.schedule_terreiro_do_paco_barreiro_uteis);
 			else
-				return getResources().getStringArray(R.array.schedule_terreiro_do_paco_barreiro_sabados_domingos_feriados);
+				return getResources()
+						.getStringArray(
+								R.array.schedule_terreiro_do_paco_barreiro_sabados_domingos_feriados);
 		}
-		  return null;
+		return null;
 	}
 
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="wrap_content">
+	<TextView android:text="H" android:layout_height="wrap_content"
+		android:layout_width="wrap_content" android:id="@+id/item_hour"
+		android:layout_alignParentLeft="true" android:gravity="center_vertical|center_horizontal"
+		android:padding="10dp"></TextView>
+	<GridView android:layout_height="fill_parent" android:id="@+id/item_minutes"
+		android:layout_width="fill_parent" android:layout_toRightOf="@id/item_hour" android:layout_alignBottom="@id/item_hour"></GridView>
+		<View
+    android:background="#333333"
+    android:layout_width="fill_parent"
+    android:layout_height="2dp"
+    android:layout_below="@id/item_minutes" />
+</RelativeLayout>
